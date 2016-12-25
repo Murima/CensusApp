@@ -25,8 +25,14 @@ public class TokenManagement {
         Editor editor = userPrefs.edit();
         editor.putString(AUTH_TOKEN, userToken);
         editor.apply();
+    }
 
-
+    protected void deleteToken(){
+        //delete token
+        SharedPreferences userPrefs = context.getSharedPreferences(TOKEN_PREFS, 0);
+        Editor editor  = userPrefs.edit();
+        editor.clear();
+        editor.commit();
     }
 
     protected String getToken(){

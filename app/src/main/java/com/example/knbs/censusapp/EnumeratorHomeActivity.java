@@ -1,8 +1,10 @@
 package com.example.knbs.censusapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,14 +14,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class EnumeratorHomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_enumerator_home);
+
+        //register textviews
+        TextView tvCensusForms;
+        TextView tvEnumID;
+        TextView tvTaskList;
+
+        tvCensusForms= (TextView) findViewById(R.id.tvCensusForms);
+        tvCensusForms.setOnClickListener(this);
+        tvEnumID = (TextView) findViewById(R.id.tvEnumID);
+        tvEnumID.setOnClickListener(this);
+        tvTaskList = (TextView) findViewById(R.id.tvTaskList);
+        tvTaskList.setOnClickListener(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -48,6 +65,8 @@ public class EnumeratorHomeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            TokenManagement tknMgmt = new TokenManagement(this);
+            tknMgmt.deleteToken();
             super.onBackPressed();
         }
     }
@@ -97,5 +116,24 @@ public class EnumeratorHomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.tvCensusForms:
+                Intent categoryIntent = new Intent(this, CategoryActivity.class);
+                startActivity(categoryIntent);
+                break;
+            case R.id.tvEnumID:
+                Intent enumeratorID = new Intent(this, EnumeratorIDActivity.class);
+                startActivity(enumeratorID);
+                break;
+            default:
+                Log.i("DEFAULT ONCLICK OPT","This is default switch mode");
+                break;
+        }
     }
 }

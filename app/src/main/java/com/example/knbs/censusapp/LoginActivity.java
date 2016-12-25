@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Matcher;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -41,10 +43,10 @@ public class LoginActivity extends AppCompatActivity {
     protected EditText etEmail;
     protected EditText etPassword;
     private UserLoginTask mAuthTask=null;
-    public View viewProgressBar;
     protected Button btLogin;
-    protected View viewForm;
 
+
+    @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -55,15 +57,11 @@ public class LoginActivity extends AppCompatActivity {
         //setup login forms
         etEmail = (EditText) findViewById(R.id.input_email);
         //populateAutoComplete();
-
-
         etPassword = (EditText) findViewById(R.id.input_password);
-
         etPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                // on editor aciton (enter key)
                 int customImeActionid = getResources().getInteger(R.integer.customImeActionId);
                 if(actionId==customImeActionid || actionId==EditorInfo.IME_NULL){
                     attemptLogin();
@@ -82,6 +80,20 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Take care of popping the fragment back stack or finishing the activity
+     * as appropriate.
+     */
+    @Override
+    public void onBackPressed() {
+        //TODO implement on back presesd logic properly
+        super.onBackPressed();
+        TokenManagement tknMgmt = new TokenManagement(this);
+        tknMgmt.deleteToken();
+        btLogin.setClickable(true);
+
+    }
+
     public void attemptLogin() {
         // attempt to login the enumerator
 
@@ -93,16 +105,14 @@ public class LoginActivity extends AppCompatActivity {
 
         validateCredentials(emailEntered, passwordEntered);
         //everythings ok login
-
         mAuthTask = new UserLoginTask(this, emailEntered, passwordEntered);
         mAuthTask.execute();
 
         TokenManagement tkMgmt = new TokenManagement(this);
         String recvdToken = tkMgmt.getToken();
-        if (recvdToken!=null){
+        if (recvdToken != null) {
             onLoginSuccess();
-        }
-        else {
+        } else {
             onLoginFailure();
         }
     }
@@ -135,8 +145,10 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        else if(passwordEntered.length()<4){
+        else if(passwordEntered.length()<=4){
             etPassword.setError(getString(R.string.error_invalid_password));
+            focusView=etPassword;
+            cancel=true;
         }
 
         if (cancel) {
@@ -146,9 +158,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         else {
-            //OK
+            //everythings ok login
             return;
-
         }
     }
 
@@ -171,11 +182,12 @@ public class LoginActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+
         focusView=etEmail;
         focusView.requestFocus();
         btLogin.setClickable(true);
-        etPassword.setError(getString(R.string.error_invalid_password));
-        etEmail.setError(getString(R.string.error_invalid_email));
+        /*etPassword.setError(getString(R.string.error_invalid_password));
+        etEmail.setError(getString(R.string.error_invalid_email));*/
     }
 
 
@@ -207,12 +219,6 @@ public class LoginActivity extends AppCompatActivity {
             progressDiag = new ProgressDialog(activityContext, R.style.AppTheme_Dark_Dialog);
             progressDiag.setIndeterminate(true);
             progressDiag.setMessage("Authenticating...");
-            progressDiag.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    UserLoginTask.this.cancel(true);
-                }
-            });
             progressDiag.show();
 
         }
@@ -245,9 +251,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 connection.connect();
 
-
                 //Log.i("GET ERROR STREAM ",""+errorstream);
-
 
                 InputStream byteStream =connection.getInputStream(); //inputstream for reading
                 BufferedReader buffferRD= new BufferedReader(new InputStreamReader(byteStream));
@@ -265,7 +269,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 */
 
-
             } catch (MalformedURLException e) {
                 Log.e("MalformedURLException", "malformed URL");
                 e.printStackTrace();
@@ -278,15 +281,17 @@ public class LoginActivity extends AppCompatActivity {
                 storeToken(token);
             }
 
+
             return null;
-
-
         }
 
         private void storeToken(String token) {
             //store the token retrieved
             TokenManagement tokenMgmt = new TokenManagement(activityContext);
             tokenMgmt.storeToken(token);
+        }
+        private void checkConnectivity(){
+            
         }
 
         @Override
@@ -296,8 +301,4 @@ public class LoginActivity extends AppCompatActivity {
             progressDiag.dismiss();
         }
     }
-
-
-
-
 }

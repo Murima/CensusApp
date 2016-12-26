@@ -1,0 +1,123 @@
+{
+  "survey_properties": {
+    "intro_message": "None...It will be skipped!",
+    "end_message": "Thank you for having the time to take our survey.",
+    "skip_intro": true
+  },
+  "questions": [
+    {
+      "question_type": "String",
+      "question_title": "How many dwelling units does the house hold/occupy?",
+      "description": "",
+      "required": true
+    },
+    {
+      "question_type": "String",
+      "question_title": "How many habitable rooms do these units contain ?",
+      "description": "",
+      "required": true
+    },
+    {
+      "question_type": "Radioboxes",
+      "question_title": "What is the tenure status of the house?",
+      "description": "",
+      "required": true,
+      "random_choices": true,
+      "choices": [
+        "Purchased",
+        "Constructed",
+        "Inherited"
+      ]
+    },
+    {
+      "question_type": "Radioboxes",
+      "question_title": "If rented/ provided state whether ?",
+      "description": "",
+      "required": false,
+      "random_choices": true,
+      "choices": [
+        "Government",
+        "Local authority",
+        "Parastatal",
+        "Private company",
+        "Individual",
+        "Faith based organization/ NGO",
+        "other"
+      ]
+    },
+    {
+      "question_type": "Radioboxes",
+      "question_title": "What is the main source of water for the household?",
+      "description": "",
+      "required": true,
+      "random_choices": true,
+      "choices": [
+        "Pond",
+        "Dam",
+        "Lake",
+        "Stream/River",
+        "Protected Well",
+        "Unprotected well",
+        "Borehole",
+        "Piped into dwelling",
+        "Piped",
+        "Rain harvested",
+        "Water vendor",
+        "Other"
+      ]
+    },
+    {
+      "question_type": "Radioboxes",
+      "question_title": "What is the main mode of human waste disposal?",
+      "description": "",
+      "required": true,
+      "random_choices": true,
+      "choices": [
+        "Main sewer",
+        "Septic tank",
+        "Cess pool",
+        "Pit latrine covered",
+        "Pit latrine uncovered",
+        "Bucket latrine",
+        "Bush",
+        "Other"
+      ]
+    },
+
+    {
+      "question_type": "Radioboxes",
+      "question_title": "What is the main type of cooking oil?",
+      "description": "",
+      "required": true,
+      "random_choices": true,
+      "choices": [
+        "Electricity",
+        "Paraffin",
+        "LPG",
+        "Biogas",
+        "Firewood",
+        "Charcoal",
+        "Solar",
+        "Other"
+      ]
+    },
+    {
+      "question_type": "Radioboxes",
+      "question_title": "What is the main type of lighting fuel?",
+      "description": "",
+      "required": true,
+      "random_choices": true,
+      "choices": [
+        "Electricity",
+        "Pressure lamp",
+        "Lantern",
+        "Tin lamp",
+        "Gas lamp",
+        "Fuel wood",
+        "Solar",
+        "Other"
+      ]
+    }
+
+  ]
+}

@@ -15,7 +15,7 @@ import java.io.InputStream;
 /**
  * Category Activity
  */
-public class CategoryActivity extends AppCompatActivity {
+public class CategoryActivity extends AppCompatActivity implements View.OnClickListener{
     private static final int SURVEY_REQUEST = 1337;
 
     @Override
@@ -24,14 +24,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form_categories);
 
         TextView tvForAll = (TextView) findViewById(R.id.tvForAll);
-        tvForAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i_survey = new Intent(CategoryActivity.this, SurveyActivity.class);
-                i_survey.putExtra("json_survey", loadSurveyJson("example_survey_1.json"));
-                startActivityForResult(i_survey, SURVEY_REQUEST);
-            }
-        });
+        tvForAll.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +57,22 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tvForAll:
+                Intent i_survey = new Intent(CategoryActivity.this, SurveyActivity.class);
+                i_survey.putExtra("json_survey", loadSurveyJson("information_for_all.json"));
+                startActivityForResult(i_survey, SURVEY_REQUEST);
+                break;
+            /*case R.id.tvEnumID:
+                Intent enumeratorID = new Intent(this, EnumeratorIDActivity.class);
+                startActivity(enumeratorID);
+                break;
+            default:
+                Log.i("DEFAULT ONCLICK OPT","This is default switch mode");
+                break;*/
+        }
+    }
 }
 

@@ -1,0 +1,29 @@
+
+{
+  "survey_properties": {
+    "intro_message": "None...It will be skipped!",
+    "end_message": "Thank you for having the time to take our survey.",
+    "skip_intro": true
+  },
+  "questions": [
+    {
+      "question_type": "String",
+      "question_title": "What was the occupant doing for the last 7 days preceding this census ?",
+      "description": "",
+      "required": true
+    },
+
+    {
+      "question_type": "String",
+      "question_title": "Who is the occupants main employer?",
+      "description": "",
+      "required": true
+    },
+    {
+      "question_title": "How many hours did the occupant work in the last 7 days?",
+      "description": "[per day]",
+      "required": true,
+      "question_type": "Number"
+    }
+  ]
+}

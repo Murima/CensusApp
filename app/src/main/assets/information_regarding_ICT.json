@@ -1,0 +1,57 @@
+{
+  "survey_properties": {
+    "intro_message": "None...It will be skipped!",
+    "end_message": "Thank you for having the time to take our survey.",
+    "skip_intro": true
+  },
+  "questions": [
+    {
+      "question_type": "Checkboxes",
+      "question_title": "Was the occupant able to get a service from the following items over the last one month ?",
+      "description": "",
+      "required": false,
+      "random_choices": true,
+      "choices": [
+        "Radio",
+        "Television",
+        "Mobile Phone",
+        "Landline",
+        "Computer",
+        "Internet"
+      ]
+    },
+    {
+      "question_type": "Radioboxes",
+      "question_title": "How often does the occupant use internet (eg. email, chatting, etc) ?",
+      "description": "",
+      "required": true,
+      "random_choices": true,
+      "choices": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Yearly",
+        "Never",
+        "Dont Know"
+      ]
+    },
+    {
+      "question_type": "Radioboxes",
+      "question_title": "Where does the occupant MAINLY use the ineternet ?",
+      "description": "",
+      "required": true,
+      "random_choices": true,
+      "choices": [
+        "Own house",
+        "A friend's house",
+        "Office/ Workplace",
+        "Cyber cafe",
+        "Community center",
+        "Educational center",
+        "Other",
+        "Mobile phone",
+        "Dont know"
+      ]
+    }
+  ]
+}

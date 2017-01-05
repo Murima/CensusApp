@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -110,6 +111,15 @@ public class EnumeratorHomeActivity extends AppCompatActivity
         else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+            sendIntent.setType("text/html");
+            String link = "https://www.android.com/";
+            String linkValue = "Click Me";
+            String body1 = "<a href=\"" + link + "\">" + link+ "</a>";//I don't want this
+            String body2 = "<a href=\"" + link + "\">" + linkValue + "</a>";//This is not working
+            sendIntent.putExtra(Intent.EXTRA_INTENT, Html.fromHtml(body2));
+            startActivity(Intent.createChooser(sendIntent, "Share with"));
+
 
         }
 

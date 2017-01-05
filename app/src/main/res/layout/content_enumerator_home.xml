@@ -30,13 +30,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvEnumID"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:typeface="serif"
-        android:textSize="24sp"
-        android:textColor="@android:color/background_light"
-        android:textStyle="normal|bold"
+        android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/ic_contacts_black"
+        style="@style/CensusTextAppearance"
         android:drawablePadding="8dp"
         />
     <TextView
@@ -46,11 +42,8 @@
         android:id="@+id/tvTaskList"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:typeface="serif"
-        android:textSize="24sp"
-        android:textColor="@android:color/background_light"
-        android:textStyle="normal|bold"
+        style="@style/CensusTextAppearance"
+
         android:drawableLeft="@drawable/ic_assignment_turned_in_black"
         android:drawablePadding="8dp"
         />
@@ -61,11 +54,8 @@
         android:id="@+id/tvCensusForms"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:typeface="serif"
-        android:textSize="24sp"
-        android:textColor="@android:color/background_light"
-        android:textStyle="normal|bold"
+        style="@style/CensusTextAppearance"
+
         android:drawableLeft="@drawable/ic_library_books_black"
         android:drawablePadding="8dp"
         />

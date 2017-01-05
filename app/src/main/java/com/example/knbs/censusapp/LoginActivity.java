@@ -186,7 +186,9 @@ public class LoginActivity extends AppCompatActivity {
         focusView=etEmail;
         focusView.requestFocus();
         btLogin.setClickable(true);
-        /*etPassword.setError(getString(R.string.error_invalid_password));
+        ProgressDialog prodDiag = new ProgressDialog(this);
+        prodDiag.dismiss();
+        /*etPassword.setError(getSxtring(R.string.error_invalid_password));
         etEmail.setError(getString(R.string.error_invalid_email));*/
     }
 
@@ -217,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
 
             btLogin.setClickable(false);
             progressDiag = new ProgressDialog(activityContext, R.style.AppTheme_Dark_Dialog);
-            progressDiag.setIndeterminate(true);
+            progressDiag.setIndeterminate(false);
             progressDiag.setMessage("Authenticating...");
             progressDiag.show();
 
@@ -279,6 +281,7 @@ public class LoginActivity extends AppCompatActivity {
                 //e.printStackTrace();
                 String token = null;
                 storeToken(token);
+
             }
 
 
@@ -291,7 +294,7 @@ public class LoginActivity extends AppCompatActivity {
             tokenMgmt.storeToken(token);
         }
         private void checkConnectivity(){
-            
+            //TODO check if there is internet connectivity
         }
 
         @Override

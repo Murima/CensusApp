@@ -1,7 +1,16 @@
 package com.example.knbs.censusapp;
 
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
 /**
- * Created by killer on 12/22/16.
+ * Activity for displaying the enumerator identification
  */
-public class EnumeratorIDActivity {
+public class EnumeratorIDActivity extends AppCompatActivity{
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_enumerator_id);
+    }
+
 }

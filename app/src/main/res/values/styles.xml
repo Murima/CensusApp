@@ -19,4 +19,12 @@
 
     <style name="AppTheme.Dark_Dialog" parent="AppTheme.Dark_Dialog" />
 
+    <style name="CensusTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:textStyle">normal|bold</item>
+
+    </style>
+
 </resources>

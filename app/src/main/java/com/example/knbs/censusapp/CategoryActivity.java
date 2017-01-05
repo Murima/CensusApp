@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Category Activity
+ * Category Activity to choose categories of questions
  */
 public class CategoryActivity extends AppCompatActivity implements View.OnClickListener{
     private static final int SURVEY_REQUEST = 1337;
@@ -25,6 +25,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
         TextView tvForAll = (TextView) findViewById(R.id.tvForAll);
         tvForAll.setOnClickListener(this);
+
     }
 
     @Override

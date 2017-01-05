@@ -16,6 +16,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +34,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 
 /**
@@ -186,8 +190,6 @@ public class LoginActivity extends AppCompatActivity {
         focusView=etEmail;
         focusView.requestFocus();
         btLogin.setClickable(true);
-        ProgressDialog prodDiag = new ProgressDialog(this);
-        prodDiag.dismiss();
         /*etPassword.setError(getSxtring(R.string.error_invalid_password));
         etEmail.setError(getString(R.string.error_invalid_email));*/
     }
@@ -227,61 +229,62 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
+            if (isNetworkAvailable()) {
+                try {
+                    URL url = new URL(API_AUTH);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("POST");
 
 
-            try {
-                URL url = new URL(API_AUTH);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
+                    Uri.Builder builder = Uri.parse(API_AUTH).buildUpon()
+                            .appendQueryParameter("email", email)
+                            .appendQueryParameter("password", password);
+
+                    String queryParams = builder.build().getEncodedQuery();
+
+                    OutputStream outStream = connection.getOutputStream();//outputstream  for writing
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
+                    //write the params
+                    writer.write(queryParams);
+                    //bufferedwriter safety operations
+                    writer.flush();
+                    writer.close();
+
+                    outStream.close();
+
+                    connection.connect();
+
+                    //Log.i("GET ERROR STREAM ",""+errorstream);
+
+                    InputStream byteStream = connection.getInputStream(); //inputstream for reading
+                    BufferedReader buffferRD = new BufferedReader(new InputStreamReader(byteStream));
+
+                    String line;
+                    while ((line = buffferRD.readLine()) != null) {
+                        resultBuilder = new StringBuilder();
+                        resultBuilder.append(line);
+                    }
+                    String token = resultBuilder.toString();
+                    storeToken(token);
+
+                Log.i("RESULTING TOKEN",""+resultBuilder.toString());
 
 
-                Uri.Builder builder =  Uri.parse(API_AUTH).buildUpon()
-                        .appendQueryParameter("email", email)
-                        .appendQueryParameter("password", password);
+                } catch (MalformedURLException e) {
+                    Log.e("MalformedURLException", "malformed URL");
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    //TODO handle i/o internet fail CONNMAN exception
+                    Log.e("IOException", "ERROR IN I/O :EXCEPTION BLOCK");
+                    //e.printStackTrace();
+                    String token = null;
+                    storeToken(token);
 
-                String queryParams = builder.build().getEncodedQuery();
-
-                OutputStream outStream= connection.getOutputStream();//outputstream  for writing
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
-                //write the params
-                writer.write(queryParams);
-                //bufferedwriter safety operations
-                writer.flush();
-                writer.close();
-
-                outStream.close();
-
-                connection.connect();
-
-                //Log.i("GET ERROR STREAM ",""+errorstream);
-
-                InputStream byteStream =connection.getInputStream(); //inputstream for reading
-                BufferedReader buffferRD= new BufferedReader(new InputStreamReader(byteStream));
-
-                String line;
-                while((line=buffferRD.readLine()) != null){
-                    resultBuilder = new StringBuilder();
-                    resultBuilder.append(line);
                 }
-
-                String token = resultBuilder.toString();
-                storeToken(token);
-
-                /*Log.i("RESULTING TOKEN",""+resultBuilder.toString());
-
-                */
-
-            } catch (MalformedURLException e) {
-                Log.e("MalformedURLException", "malformed URL");
-                e.printStackTrace();
             }
-            catch (IOException e) {
-                //TODO handle i/o internet fail CONNMAN exception
-                Log.e("IOException", "ERROR IN I/O :EXCEPTION BLOCK");
-                //e.printStackTrace();
-                String token = null;
-                storeToken(token);
 
+            else {
+                Log.i("NO INTERNET CONNECTION","exception");
             }
 
 
@@ -293,8 +296,18 @@ public class LoginActivity extends AppCompatActivity {
             TokenManagement tokenMgmt = new TokenManagement(activityContext);
             tokenMgmt.storeToken(token);
         }
-        private void checkConnectivity(){
-            //TODO check if there is internet connectivity
+
+        public boolean isNetworkAvailable() {
+            //check if network is available
+
+            ConnectivityManager cm = (ConnectivityManager)
+                    getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            //if networkInfo is not null
+            if (networkInfo != null && networkInfo.isConnected()) {
+                return true;
+            }
+            return false;
         }
 
         @Override

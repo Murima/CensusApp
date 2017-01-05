@@ -2,7 +2,7 @@
 {
   "survey_properties": {
     "intro_message": "None...It will be skipped!",
-    "end_message": "Thank you for having the time to take our survey.",
+    "end_message": "Category complete please open the next category",
     "skip_intro": true
   },
   "questions": [

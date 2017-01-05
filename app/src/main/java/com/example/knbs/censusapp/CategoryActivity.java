@@ -55,7 +55,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Log.v("ANSWERS JSON", answers_json);
                 Log.d("****", "*****************************************************");
 
-                //do whatever you want with them...
+
             }
         }
     }

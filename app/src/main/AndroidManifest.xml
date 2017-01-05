@@ -45,9 +45,8 @@
 
         <activity
             android:name=".EnumeratorIDActivity"
-            android:label="Enumerator Identification">
+            android:label="Enumerator Identification"/>
 
-        </activity>
     </application>
 
 </manifest>

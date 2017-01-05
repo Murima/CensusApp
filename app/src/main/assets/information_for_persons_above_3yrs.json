@@ -8,7 +8,7 @@
   "questions": [
     {
       "question_type": "Checkboxes",
-      "question_title": "What type of disability does the occupant have?",
+      "question_title": "What is the occupants current education status?",
       "description": "",
       "required": false,
       "random_choices": true,

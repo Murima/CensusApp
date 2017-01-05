@@ -136,6 +136,7 @@
             style="@style/CensusTextAppearance"
             android:text="5."/>
         <TextView
+            android:id="@+id/tvICTinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -158,6 +159,7 @@
             style="@style/CensusTextAppearance"
             android:text="6."/>
         <TextView
+            android:id="@+id/tvLabourforce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -180,6 +182,7 @@
             style="@style/CensusTextAppearance"
             android:text="7."/>
         <TextView
+            android:id="@+id/tvOwnershipAmenities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -202,6 +205,7 @@
             style="@style/CensusTextAppearance"
             android:text="8."/>
         <TextView
+            android:id="@+id/tvHousingCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

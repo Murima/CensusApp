@@ -25,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EnumeratorIDActivity extends AppCompatActivity{
     //base url for the api
     public static String  BASE_URL = "http://10.0.2.2:8000/api/user-details/";
+    String userToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,17 +38,18 @@ public class EnumeratorIDActivity extends AppCompatActivity{
         final TextView tvEnumLName = (TextView) findViewById(R.id.tvEnumLName);
         final TextView tvCounty = (TextView) findViewById(R.id.tvCounty);
         final TextView tvPhone = (TextView) findViewById(R.id.tvPhone);
-        TextView tvReportsTo = (TextView) findViewById(R.id.tvReportsTo);
+        final TextView tvReportsTo = (TextView) findViewById(R.id.tvReportsTo);
         final TextView tvSupervisorNo = (TextView) findViewById(R.id.tvSupervisorNo);
 
-        Gson gson = new GsonBuilder().create();
 
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
+       OkHttpClient.Builder client = new OkHttpClient.Builder();
 
-        /*HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        client.addInterceptor(loggingInterceptor);*/
+        client.addInterceptor(loggingInterceptor);
+
+        Gson gson = new GsonBuilder().create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -57,7 +59,10 @@ public class EnumeratorIDActivity extends AppCompatActivity{
 
         ApiService restAPI = retrofit.create(ApiService.class);
 
-        Call<AccountModel> call = restAPI.getUserDetails();
+        TokenManagement tknMgmt = new TokenManagement(this);
+        userToken = tknMgmt.getToken();
+
+        Call<AccountModel> call = restAPI.getUserDetails(LoginActivity.USER_EMAIL,userToken);
         call.enqueue(new Callback<AccountModel>() {
             @Override
             public void onResponse(Call<AccountModel> call, Response<AccountModel> response) {
@@ -74,6 +79,7 @@ public class EnumeratorIDActivity extends AppCompatActivity{
                     tvCounty.setText(userDetails.getCounty());
                     tvPhone.setText(userDetails.getPhoneNumber());
                     tvSupervisorNo.setText(userDetails.getSupervisorPhone());
+                    tvReportsTo.setText(userDetails.getReportsTo());
                 }
             }
 

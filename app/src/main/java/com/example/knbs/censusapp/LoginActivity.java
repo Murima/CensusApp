@@ -48,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     protected EditText etPassword;
     private UserLoginTask mAuthTask=null;
     protected Button btLogin;
+    public static String USER_EMAIL;
+    public static boolean TOKEN_AVAILABLE=false;
 
 
     @Override
@@ -60,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //setup login forms
         etEmail = (EditText) findViewById(R.id.input_email);
-        //populateAutoComplete();
         etPassword = (EditText) findViewById(R.id.input_password);
         etPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
@@ -101,24 +102,26 @@ public class LoginActivity extends AppCompatActivity {
     public void attemptLogin() {
         // attempt to login the enumerator
 
+
         //reset errors
         etEmail.setError(null);
         etPassword.setError(null);
         String emailEntered = etEmail.getText().toString();
+
+        //store email for other classes to use
+        USER_EMAIL = emailEntered;
+
         String passwordEntered = etPassword.getText().toString();
 
         validateCredentials(emailEntered, passwordEntered);
+
         //everythings ok login
         mAuthTask = new UserLoginTask(this, emailEntered, passwordEntered);
         mAuthTask.execute();
 
-        TokenManagement tkMgmt = new TokenManagement(this);
-        String recvdToken = tkMgmt.getToken();
-        if (recvdToken != null) {
-            onLoginSuccess();
-        } else {
-            onLoginFailure();
-        }
+        Log.i("IN ATTEMPT LOGIN", "tokon_available status"+TOKEN_AVAILABLE);
+
+
     }
 
     private void validateCredentials(String emailEntered, String passwordEntered) {
@@ -190,10 +193,9 @@ public class LoginActivity extends AppCompatActivity {
         focusView=etEmail;
         focusView.requestFocus();
         btLogin.setClickable(true);
-        /*etPassword.setError(getSxtring(R.string.error_invalid_password));
-        etEmail.setError(getString(R.string.error_invalid_email));*/
+        etPassword.setError(getString(R.string.error_incorrect_password));
+        etEmail.setError(getString(R.string.error_email_incorrect));
     }
-
 
 
     public class UserLoginTask extends AsyncTask<Void, Void, Void> {
@@ -203,7 +205,6 @@ public class LoginActivity extends AppCompatActivity {
         private String email;
         private String password;
         StringBuilder resultBuilder;
-        public static final String TOKEN_PREFS ="my_tokens";
         ProgressDialog progressDiag;
         public LoginActivity activityContext;
 
@@ -267,7 +268,7 @@ public class LoginActivity extends AppCompatActivity {
                     String token = resultBuilder.toString();
                     storeToken(token);
 
-                Log.i("RESULTING TOKEN",""+resultBuilder.toString());
+                    Log.i("RESULTING TOKEN",""+resultBuilder.toString());
 
 
                 } catch (MalformedURLException e) {
@@ -275,7 +276,8 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } catch (IOException e) {
                     Log.e("IOException", "ERROR IN I/O :EXCEPTION BLOCK");
-                    //e.printStackTrace();
+                    e.printStackTrace();
+                    TOKEN_AVAILABLE=false;
                     String token = null;
                     storeToken(token);
 
@@ -290,10 +292,25 @@ public class LoginActivity extends AppCompatActivity {
             return null;
         }
 
-        private void storeToken(String token) {
+        private void storeToken(String tokenString) {
             //store the token retrieved
+            String tokenKey="token";
+            String tokenValue="";
+
+            try {
+                JSONObject jsonObject = new JSONObject(tokenString);
+                if(jsonObject.has(tokenKey)){
+                    TOKEN_AVAILABLE=true;
+                    tokenValue = jsonObject.getString(tokenKey);
+
+                }
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
             TokenManagement tokenMgmt = new TokenManagement(activityContext);
-            tokenMgmt.storeToken(token);
+            tokenMgmt.storeToken(tokenValue);
         }
 
         public boolean isNetworkAvailable() {
@@ -314,6 +331,13 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             progressDiag.setMessage("Done!");
             progressDiag.dismiss();
+
+            if (TOKEN_AVAILABLE) {
+                onLoginSuccess();
+
+            } else {
+                onLoginFailure();
+            }
         }
     }
 }

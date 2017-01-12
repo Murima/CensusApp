@@ -39,7 +39,7 @@ import org.json.JSONObject;
 
 
 /**
- * login activity that checks credentials and logs the enumerator
+ * login activity that checks credentials and logs the enumerator from the server
  */
 
 public class LoginActivity extends AppCompatActivity {
@@ -274,7 +274,6 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("MalformedURLException", "malformed URL");
                     e.printStackTrace();
                 } catch (IOException e) {
-                    //TODO handle i/o internet fail CONNMAN exception
                     Log.e("IOException", "ERROR IN I/O :EXCEPTION BLOCK");
                     //e.printStackTrace();
                     String token = null;

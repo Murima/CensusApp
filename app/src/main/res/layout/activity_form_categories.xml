@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             style="@style/CensusTextAppearance"
+            android:textColor="@color/colorPrimaryBlack"
             android:textSize="20sp"
             android:text="1."/>
         <TextView
@@ -64,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:textColor="@color/colorPrimaryBlack"
             style="@style/CensusTextAppearance"
             android:text="2."/>
         <TextView
@@ -87,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/CensusTextAppearance"
+            android:textColor="@color/colorPrimaryBlack"
             android:textSize="22sp"
             android:text="3."/>
         <TextView
@@ -110,6 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:textColor="@color/colorPrimaryBlack"
             style="@style/CensusTextAppearance"
             android:text="4."/>
         <TextView
@@ -133,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:textColor="@color/colorPrimaryBlack"
             style="@style/CensusTextAppearance"
             android:text="5."/>
         <TextView
@@ -156,6 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:textColor="@color/colorPrimaryBlack"
             style="@style/CensusTextAppearance"
             android:text="6."/>
         <TextView
@@ -179,6 +185,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:textColor="@color/colorPrimaryBlack"
             style="@style/CensusTextAppearance"
             android:text="7."/>
         <TextView
@@ -202,6 +209,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:textColor="@color/colorPrimaryBlack"
             style="@style/CensusTextAppearance"
             android:text="8."/>
         <TextView

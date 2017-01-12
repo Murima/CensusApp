@@ -8,6 +8,7 @@
         android:id="@+id/imgAccount"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_margin="10dp"
         android:src="@mipmap/ic_launcher"
         />
     <LinearLayout
@@ -24,10 +25,11 @@
             android:textSize="20sp"
             />
         <TextView
+            android:id="@+id/enumID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="24sp"
+            android:textSize="27sp"
             android:textStyle="bold"
             android:text="00000"/>
     </LinearLayout>
@@ -37,7 +39,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/imgAccount">
+        android:layout_below="@+id/imgAccount"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="189dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -47,6 +51,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="First Name:"/>
 
             <TextView
@@ -62,13 +67,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Last Name:"/>
+                android:layout_marginLeft="20dp"
+                android:text="Last Name:"
+                android:layout_weight="1.20" />
 
             <TextView
                 android:id="@+id/tvEnumLName"
@@ -89,6 +97,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="County:"/>
 
             <TextView
@@ -110,6 +119,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="Phone:"/>
 
             <TextView
@@ -131,6 +141,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="Reports To:"/>
 
             <TextView
@@ -152,13 +163,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="Supervisor No:"/>
 
             <TextView
+
                 android:id="@+id/tvSupervisorNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:text="0739765439">
 
             </TextView>

@@ -36,6 +36,10 @@ public class AccountModel {
     @Expose
     private String supervisorPhone;
 
+    @SerializedName("account_img")
+    @Expose
+    private String accountImg;
+
     public String getFirstName() {
         return firstName;
     }
@@ -107,4 +111,13 @@ public class AccountModel {
     public void setSupervisorPhone(String supervisorPhone) {
         this.supervisorPhone = supervisorPhone;
     }
+
+    public String getAccountImg() {
+        return accountImg;
+    }
+
+    public void setAccountImg(String accountImg) {
+        this.accountImg = accountImg;
+    }
+
 }

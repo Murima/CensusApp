@@ -10,6 +10,7 @@ import com.example.knbs.censusapp.POJO.AccountModel;
 import com.example.knbs.censusapp.api.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -32,7 +33,7 @@ public class EnumeratorIDActivity extends AppCompatActivity{
         setContentView(R.layout.activity_enumerator_id);
 
         //initialize veiws
-        ImageView imgAcc = (ImageView) findViewById(R.id.imgAccount);
+        final ImageView imgAcc = (ImageView) findViewById(R.id.imgAccount);
         final TextView enumID = (TextView) findViewById(R.id.enumID);
         final TextView tvEnumFName = (TextView) findViewById(R.id.tvEnumFName);
         final TextView tvEnumLName = (TextView) findViewById(R.id.tvEnumLName);
@@ -41,8 +42,7 @@ public class EnumeratorIDActivity extends AppCompatActivity{
         final TextView tvReportsTo = (TextView) findViewById(R.id.tvReportsTo);
         final TextView tvSupervisorNo = (TextView) findViewById(R.id.tvSupervisorNo);
 
-
-       OkHttpClient.Builder client = new OkHttpClient.Builder();
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -80,6 +80,8 @@ public class EnumeratorIDActivity extends AppCompatActivity{
                     tvPhone.setText(userDetails.getPhoneNumber());
                     tvSupervisorNo.setText(userDetails.getSupervisorPhone());
                     tvReportsTo.setText(userDetails.getReportsTo());
+                    String imgURL = userDetails.getAccountImg().replace("localhost", "10.0.2.2");
+                    Picasso.with(EnumeratorIDActivity.this).load(imgURL).into(imgAcc);
                 }
             }
 

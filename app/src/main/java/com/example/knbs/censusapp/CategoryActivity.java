@@ -1,24 +1,53 @@
 package com.example.knbs.censusapp;
 
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.Manifest;
+import android.widget.Toast;
 
 import com.androidadvance.androidsurvey.SurveyActivity;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStates;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
+//import java.util.jar.Manifest;
 
 /**
  * Category Activity to choose categories of questions
  */
-public class CategoryActivity extends AppCompatActivity implements View.OnClickListener {
+public class CategoryActivity extends AppCompatActivity implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
+{
     private static final int SURVEY_REQUEST = 1337;
+    private static int CATEGORY_ID;
+    private static String LOCATION_TAG = "LOCATION_DEBUG";
+    GoogleApiClient googleApiClient;
+
+    Location lastLocation;
+    LocationRequest locationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +72,24 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         tvOwnershipAmenities.setOnClickListener(this);
         tvHousingCondition.setOnClickListener(this);
 
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+    }
+    @Override
+    protected void onStart(){
+        googleApiClient.connect();
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        googleApiClient.disconnect();
+        super.onStop();
     }
 
     @Override
@@ -133,5 +180,124 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        //once connected to the google services
+        Log.d(LOCATION_TAG,"connected to google API");
+
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            return;
+        }
+
+        createLocationRequest();
+        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
+        if (lastLocation!=null){
+            Log.i("LOCATION_DEBUG","Latitude is:"+lastLocation.getLatitude());
+            Log.i("LOCATION_DEBUG","Longitude is:"+lastLocation.getLongitude());
+        }
+        else{
+            Log.d("LOCATION_DEBUG","location is null");
+            startLocationUpdates();
+        }
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(LOCATION_TAG,"in onConnectionFailed");
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.d(LOCATION_TAG,"in location changed");
+
+        lastLocation = location;
+
+        Toast.makeText(this, "LOcation updated",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    protected void   createLocationRequest() {
+
+        Log.d(LOCATION_TAG, "in createLocationRequest");
+
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    protected void locationSettingsRequest(){
+     //check location settings
+
+        LocationRequest locationRequest = new LocationRequest();
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+
+        PendingResult<LocationSettingsResult> result =
+                LocationServices.SettingsApi.checkLocationSettings(googleApiClient,
+                        builder.build());
+
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+            @Override
+            public void onResult(@NonNull LocationSettingsResult result) {
+
+                final Status status = result.getStatus();
+                //final LocationSettingsStates= result.getLocationSettingsStates();
+
+                switch (status.getStatusCode()) {
+                    case LocationSettingsStatusCodes.SUCCESS:
+                        // All location settings are satisfied. The client can
+                        // initialize location requests here.
+
+                        break;
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        // Location settings are not satisfied, but this can be fixed
+                        // by showing the user a dialog.
+                 /*       try {
+                            // Show the dialog by calling startResolutionForResult(),
+                            // and check the result in onActivityResult().
+                            status.startResolutionForResult(
+                                    OuterClass.this,
+                                    REQUEST_CHECK_SETTINGS);
+                        } catch (IntentSender.SendIntentException e) {
+                            // Ignore the error.
+                        }*/
+                        break;
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        // Location settings are not satisfied. However, we have no way
+                        // to fix the settings so we won't show the dialog.
+
+                        break;
+                }
+            }
+        });
+
+    }
+
+    protected void startLocationUpdates(){
+
+        Log.d(LOCATION_TAG,"in startLocationUpdates");
+        if ( ActivityCompat.checkSelfPermission(
+                this, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+            Log.d(LOCATION_TAG,"permission failed");
+
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                googleApiClient, locationRequest, this);
+
+
+
+
+    }
 }
+
 

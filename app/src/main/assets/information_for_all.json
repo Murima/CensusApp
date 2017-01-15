@@ -26,6 +26,23 @@
       ]
     },
     {
+      "question_type": "Radioboxes",
+      "question_title": "Please select the category of this questionnaire",
+      "description": "",
+      "required": true,
+      "random_choices": false,
+      "choices": [
+        "Information for all persons",
+        "Information for persons with disabilities",
+        "Persons above 3yrs",
+        "Females above 12yrs",
+        "Labour force particulars",
+        "Information of ICT",
+        "Housing conditions and amenities",
+        "Ownership of household assets"
+      ]
+    },
+    {
       "question_title": "How old is the occupant ?",
       "description": "[put 0 if less than 1 yrs]",
       "required": true,

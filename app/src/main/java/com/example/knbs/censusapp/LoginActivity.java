@@ -93,9 +93,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onBackPressed() {
         //TODO implement on back presesd logic properly
         super.onBackPressed();
-        TokenManagement tknMgmt = new TokenManagement(this);
-        tknMgmt.deleteToken();
-        btLogin.setClickable(true);
 
     }
 
@@ -115,11 +112,10 @@ public class LoginActivity extends AppCompatActivity {
 
         validateCredentials(emailEntered, passwordEntered);
 
-        //everythings ok login
         mAuthTask = new UserLoginTask(this, emailEntered, passwordEntered);
         mAuthTask.execute();
 
-        Log.i("IN ATTEMPT LOGIN", "tokon_available status"+TOKEN_AVAILABLE);
+        Log.i("IN ATTEMPT LOGIN", "token_available status"+TOKEN_AVAILABLE);
 
 
     }

@@ -1,9 +1,10 @@
 package com.example.knbs.censusapp.api;
 
 
-import com.example.knbs.censusapp.EnumeratorIDActivity;
-import com.example.knbs.censusapp.LoginActivity;
 import com.example.knbs.censusapp.POJO.AccountModel;
+import com.example.knbs.censusapp.POJO.TaskModel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,4 +20,7 @@ public interface ApiService {
 
     @GET("{email}/")
     Call<AccountModel> getUserDetails(@Path("email") String email, @Query("token") String token);
+
+    @GET("{email}/")
+    Call<List<TaskModel>> getTaskList(@Path("email") String email, @Query("token") String token);
 }

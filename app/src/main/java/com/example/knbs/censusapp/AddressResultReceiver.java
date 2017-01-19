@@ -29,6 +29,7 @@ public class AddressResultReceiver extends ResultReceiver{
     private Handler handler;
 
     public AddressResultReceiver(Handler handler) {
+        //TODO get more precise location.
         super(handler);
         this.handler = handler;
     }

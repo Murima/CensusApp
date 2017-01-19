@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -30,26 +30,28 @@
         <activity
             android:name=".EnumeratorHomeActivity"
             android:label="@string/title_activity_enumerator_home"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".CategoryActivity"
             android:label="Census Categories"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-        <activity android:name="com.androidadvance.androidsurvey.SurveyActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="com.androidadvance.androidsurvey.SurveyActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:windowSoftInputMode="stateHidden"
-            android:label="Census Forms"/>
-
+            android:label="Census Forms"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".EnumeratorIDActivity"
-            android:label="Enumerator Identification"
-            />
+            android:label="Enumerator Identification" />
 
+        <service
+            android:name=".FetchAddressIntentService"
+            android:exported="false" />
+
+        <activity
+            android:name=".TaskLIstActivity"
+            android:label="@string/title_activity_task_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

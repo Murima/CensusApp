@@ -1,0 +1,31 @@
+Retrofit tutorial:
+http://stackoverflow.com/documentation/android/1132/retrofit2#t=201701120853284362431
+
+-location
+-household specifics
+-categories
+
+realistic longitude and latitudes
+https://itouchmap.com/latlong.html
+
+blog on android location
+http://blog.teamtreehouse.com/beginners-guide-location-android
+
+COORDINATES
+
+Akila One Estate
+lat: -1.312022
+long: 36.812696
+
+Akila 2 Estate
+lat: -1.312462
+long: 36.807793
+
+Blue Sky Estate
+lat: -1.312810
+long: 36.815245
+
+Bamboo Gardens Apartments
+lat: -1.302084
+long: 36.814601
+

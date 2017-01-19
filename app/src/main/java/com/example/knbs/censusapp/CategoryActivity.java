@@ -3,8 +3,12 @@ package com.example.knbs.censusapp;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.ResultReceiver;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -33,6 +37,8 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import static com.example.knbs.censusapp.Constants.SUCCESS_RESULT;
 //import java.util.jar.Manifest;
 
 /**
@@ -44,11 +50,15 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     private static final int SURVEY_REQUEST = 1337;
     private static int CATEGORY_ID;
     private static String LOCATION_TAG = "LOCATION_DEBUG";
+
+
     GoogleApiClient googleApiClient;
 
     Location lastLocation;
     LocationRequest locationRequest;
-
+    //address receiver
+    public AddressResultReceiver addResultReceiver;
+    public static String addressOutput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,9 +204,21 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         createLocationRequest();
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
-        if (lastLocation!=null){
+        if (lastLocation!=null)
+        {
             Log.i("LOCATION_DEBUG","Latitude is:"+lastLocation.getLatitude());
             Log.i("LOCATION_DEBUG","Longitude is:"+lastLocation.getLongitude());
+
+            // Determine whether a Geocoder is available.
+            if (!Geocoder.isPresent())
+            {
+                Toast.makeText(this, "No geocoder is available",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            startIntentService();
+
         }
         else{
             Log.d("LOCATION_DEBUG","location is null");
@@ -204,6 +226,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -218,11 +241,12 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onLocationChanged(Location location) {
         Log.d(LOCATION_TAG,"in location changed");
+        //update the last location
 
         lastLocation = location;
 
         Toast.makeText(this, "LOcation updated",
-                Toast.LENGTH_SHORT).show();
+                Toast.LENGTH_LONG).show();
     }
 
     protected void   createLocationRequest() {
@@ -236,7 +260,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     }
 
     protected void locationSettingsRequest(){
-     //check location settings
+        //TODO check location settings from user.
 
         LocationRequest locationRequest = new LocationRequest();
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
@@ -294,10 +318,56 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 googleApiClient, locationRequest, this);
 
-
-
-
     }
+
+    protected void stopLocationUpdates(){
+        //TODO Implement stop location update on last form.
+    }
+
+    protected void startIntentService() {
+        Log.d(LOCATION_TAG,"in startIntentService");
+        addResultReceiver = new AddressResultReceiver(null);
+
+        Intent intent = new Intent(this, FetchAddressIntentService.class);
+        intent.putExtra(Constants.RECEIVER, addResultReceiver);
+        intent.putExtra(Constants.LOCATION_DATA_EXTRA, lastLocation);
+        startService(intent);
+    }
+
+
+ /*   public class AddressResultReceiver extends ResultReceiver{
+
+        *//**
+         * Create a new ResultReceive to receive results.  Your
+         * {@link #onReceiveResult} method will be called from the thread running
+         * <var>handler</var> if given, or from an arbitrary thread if null.
+         *
+         * @param handler
+         *//*
+        private String ADDRESS_TAG="DEBUG_ADDRESS_RECEIVED";
+
+
+
+        public AddressResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            // Display the address string stored in resultData
+            // or an error message sent from the intent service.
+            addressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
+
+            if (resultCode == SUCCESS_RESULT) {
+                Log.d(ADDRESS_TAG, "in onReceiveResult result is:"+addressOutput);
+            }
+
+        }
+
+    }*/
+
+
+
 }
 
 

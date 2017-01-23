@@ -48,6 +48,7 @@ public class TaskLIstActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         getTasks();
 
 
@@ -91,7 +92,7 @@ public class TaskLIstActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<TaskModel>> call, Throwable t) {
-                Log.e("in onFailure", "stack");
+                Log.e("TAG", "in Failure stack");
                 t.printStackTrace();
             }
         });
@@ -103,7 +104,16 @@ public class TaskLIstActivity extends AppCompatActivity {
     private void renderScreen(List<TaskModel> taskDetails){
         Log.d(TAG, "in renderScreen");
 
-        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.task_cell, taskDetails);
+       /* ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.task_cell, taskDetails);
+        adapter.clear();
+        adapter.addAll(taskDetails);
+        lvTaskList.setAdapter(adapter);*/
+
+        TaskModel [] array = new TaskModel[taskDetails.size()];
+        for(int i = 0; i < taskDetails.size(); i++) array[i] = taskDetails.get(i);
+
+        TasksAdapter adapter = new TasksAdapter(this,
+                R.layout.task_cell, array);
         lvTaskList.setAdapter(adapter);
 
     }

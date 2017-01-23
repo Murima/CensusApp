@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EnumeratorIDActivity extends AppCompatActivity{
     //base url for the api
     public static String  BASE_URL = "http://10.0.2.2:8000/api/user-details/";
+    private static String TAG="ENUM_ID_DEBUG";
     String userToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class EnumeratorIDActivity extends AppCompatActivity{
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                //.client(client.build())
+                .client(client.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -87,7 +88,7 @@ public class EnumeratorIDActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<AccountModel> call, Throwable t) {
-                Log.e("in onFailure", "stack");
+                Log.e(TAG,"in onFailure");
                 t.printStackTrace();
             }
         });

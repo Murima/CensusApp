@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:id="@+id/textView4"
+        android:id="@+id/tvTaskName"
         android:layout_alignBaseline="@+id/checkBox"
         android:layout_alignBottom="@+id/checkBox"
         android:layout_alignParentStart="true" />
@@ -20,21 +20,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:id="@+id/textView5"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_toEndOf="@+id/textView4"
+        android:id="@+id/tvTaskID"
+        android:layout_alignBottom="@+id/tvTaskName"
+        android:layout_toEndOf="@+id/tvTaskName"
         android:layout_marginStart="31dp" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="20dp"
 
-        android:id="@+id/textView6"
-        android:layout_alignBaseline="@+id/textView5"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_toEndOf="@+id/textView5" />
+        android:id="@+id/tvTaskDuration"
+        android:layout_alignBaseline="@+id/tvTaskID"
+        android:layout_alignBottom="@+id/tvTaskID"
+        android:layout_toEndOf="@+id/tvTaskID" />
 
     <CheckBox
         android:text="CheckBox"

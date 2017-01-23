@@ -6,6 +6,20 @@
   },
   "questions": [
     {
+      "question_type": "String",
+      "question_title": "What is the name of the Estate/ Flat the household belongs",
+      "description": "[use country codes for foreigners]",
+      "required": true
+    },
+
+    {
+      "question_type": "String",
+      "question_title": "What is the house number of the household?",
+      "description": "[use country codes for foreigners]",
+      "required": true
+    },
+
+    {
       "question_type": "Radioboxes",
       "question_title": "What is the occupant's relationship to the head of this household?",
       "description": "",

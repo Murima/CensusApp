@@ -21,6 +21,6 @@ public interface ApiService {
     @GET("{email}/")
     Call<AccountModel> getUserDetails(@Path("email") String email, @Query("token") String token);
 
-    @GET("{email}/")
+    @GET("tasks/{email}/")
     Call<List<TaskModel>> getTaskList(@Path("email") String email, @Query("token") String token);
 }

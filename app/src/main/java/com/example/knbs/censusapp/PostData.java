@@ -12,12 +12,16 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.example.knbs.censusapp.Constants.BASE_URL;
 
 /**
  * Created by killer on 1/26/17.
@@ -32,12 +36,12 @@ public class PostData {
      *
      */
 
-    public static String  BASE_URL = "http://10.0.2.2:8000/api/user-details/";
+    public static String  SERVICE_URL = BASE_URL;
     private static String POST_TAG="POST_DEBUG";
     String userToken;
     private Context context;
 
-    private PostData(Context fromContext){
+    public PostData(Context fromContext){
         this.context=fromContext;
     }
 
@@ -47,11 +51,18 @@ public class PostData {
          * @params json string data
          */
 
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        client.addInterceptor(loggingInterceptor);
+
         Gson gson = new GsonBuilder().create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                //.client(client.build())
+                .baseUrl(SERVICE_URL)
+                .client(client.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -61,14 +72,15 @@ public class PostData {
         userToken = tknMgmt.getToken();
 
         Map<String, Object> formData = new ArrayMap<>();
-        formData.put("code", data);
+        formData.put("form", data);
 
         RequestBody body = RequestBody.create(okhttp3
                 .MediaType.parse("application/json; charset=utf-8"),(new JSONObject(formData))
                 .toString());
 
 //serviceCaller is the interface initialized with retrofit.create...
-        Call<ResponseBody> call = restAPIService.postFormData(userToken, body);
+        String email = LoginActivity.USER_EMAIL;
+        Call<ResponseBody> call = restAPIService.postFormData(email, userToken, body);
 
         call.enqueue(new Callback<ResponseBody>()
         {

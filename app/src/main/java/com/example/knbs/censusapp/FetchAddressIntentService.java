@@ -53,7 +53,6 @@ public class FetchAddressIntentService extends IntentService {
             addresses = geocoder.getFromLocation(
                     location.getLatitude(),
                     location.getLongitude(),
-                    // In this sample, get just a single address.
                     1);
         } catch (IOException ioException) {
             // Catch network or other I/O problems.

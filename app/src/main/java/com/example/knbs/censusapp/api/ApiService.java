@@ -28,6 +28,6 @@ public interface ApiService {
     @GET("tasks/{email}/")
     Call<List<TaskModel>> getTaskList(@Path("email") String email, @Query("token") String token);
 
-    @POST("post/data")
-    Call<ResponseBody> postFormData(@Query("token") String token, @Body RequestBody data);
+    @POST("post/data/{email}")
+    Call<ResponseBody> postFormData(@Path("email") String email, @Query("token") String token, @Body RequestBody data);
 }

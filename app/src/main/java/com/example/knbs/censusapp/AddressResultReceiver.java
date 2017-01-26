@@ -22,7 +22,8 @@ public class AddressResultReceiver extends ResultReceiver{
     private static String RESULT_DATA_KEY = PACKAGE_NAME +".RESULT_DATA_KEY";
     private static final int SUCCESS_RESULT = 0;
     public static final int FAILURE_RESULT = 1;
-    private static String ADDRESS_TAG="DEBUG_ADDRESS_RECEIVED";
+    public static String ADDRESS_TAG="DEBUG_ADDRESS_RECEIVED";
+    private Receiver mReceiver;
 
     public static String  addressOutput;
 
@@ -31,19 +32,22 @@ public class AddressResultReceiver extends ResultReceiver{
     public AddressResultReceiver(Handler handler) {
         //TODO get more precise location.
         super(handler);
-        this.handler = handler;
+        //this.handler = handler;
+    }
+    public interface Receiver {
+        public void onReceiveResult(int resultCode, Bundle resultData);
+
     }
 
+    public void setReceiver(Receiver receiver) {
+        mReceiver = receiver;
+    }
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
-        // Display the address string stored in resultData
-        // or an error message sent from the intent service.
-        addressOutput = resultData.getString(RESULT_DATA_KEY);
-
-        if (resultCode == SUCCESS_RESULT) {
-            Log.d(ADDRESS_TAG, "in onReceiveResult result is:"+addressOutput);
+        if (mReceiver != null) {
+            mReceiver.onReceiveResult(resultCode, resultData);
         }
-
     }
+
 
 }

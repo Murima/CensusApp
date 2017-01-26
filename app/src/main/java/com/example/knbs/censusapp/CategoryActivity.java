@@ -48,9 +48,9 @@ import static com.example.knbs.censusapp.Constants.SUCCESS_RESULT;
  */
 public class CategoryActivity extends AppCompatActivity implements View.OnClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
+    ,AddressResultReceiver.Receiver
 {
     private static final int SURVEY_REQUEST = 1337;
-    private static String CATEGORY_ID;
     private static String LOCATION_TAG = "LOCATION_DEBUG";
     private static String POST_TAG = "POST_DEBUG";
 
@@ -90,6 +90,10 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 .addApi(LocationServices.API)
                 .build();
 
+        addResultReceiver = new AddressResultReceiver(new Handler());
+        addResultReceiver.setReceiver(this);
+
+
     }
     @Override
     protected void onStart(){
@@ -114,6 +118,8 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Log.v("ANSWERS JSON", answers_json);
                 Log.d("****", "*****************************************************");
 
+                PostData postData = new PostData(this);
+                postData.postJson(answers_json);
             }
         }
     }
@@ -135,6 +141,8 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        String CATEGORY_ID;
+
         switch (v.getId()) {
             case R.id.tvForAll:
                 CATEGORY_ID="1";
@@ -150,6 +158,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey2 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey2.putExtra("json_survey", loadSurveyJson("information_for_females_above_12yrs.json"));
                 i_survey2.putExtra("category", CATEGORY_ID);
+                i_survey2.putExtra("location", lastLocation);
                 startActivityForResult(i_survey2, SURVEY_REQUEST);
                 break;
 
@@ -158,6 +167,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey3 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey3.putExtra("json_survey", loadSurveyJson("information_for_persons_above_3yrs.json"));
                 i_survey3.putExtra("category", CATEGORY_ID);
+                i_survey3.putExtra("location", lastLocation);
                 startActivityForResult(i_survey3, SURVEY_REQUEST);
                 break;
 
@@ -166,6 +176,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey4 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey4.putExtra("json_survey", loadSurveyJson("information_regarding_ICT.json"));
                 i_survey4.putExtra("category", CATEGORY_ID);
+                i_survey4.putExtra("location", addressOutput);
                 startActivityForResult(i_survey4, SURVEY_REQUEST);
                 break;
 
@@ -174,6 +185,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey5 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey5.putExtra("json_survey", loadSurveyJson("labour_force_particulars_above_5yrs.json"));
                 i_survey5.putExtra("category", CATEGORY_ID);
+                i_survey5.putExtra("location", lastLocation);
                 startActivityForResult(i_survey5, SURVEY_REQUEST);
                 break;
 
@@ -182,6 +194,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey6 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey6.putExtra("json_survey", loadSurveyJson("ownership_of_household_assets.json"));
                 i_survey6.putExtra("category", CATEGORY_ID);
+                i_survey6.putExtra("location", lastLocation);
                 startActivityForResult(i_survey6, SURVEY_REQUEST);
                 break;
 
@@ -190,6 +203,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey7 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey7.putExtra("json_survey", loadSurveyJson("housing_conditions_and_amenities.json"));
                 i_survey7.putExtra("category", CATEGORY_ID);
+                i_survey7.putExtra("location", lastLocation);
                 startActivityForResult(i_survey7, SURVEY_REQUEST);
                 break;
 
@@ -198,6 +212,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey8 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey8.putExtra("json_survey", loadSurveyJson("information_for_persons_with_disabilities.json"));
                 i_survey8.putExtra("category", CATEGORY_ID);
+                i_survey8.putExtra("location", lastLocation);
                 startActivityForResult(i_survey8, SURVEY_REQUEST);
                 break;
 
@@ -241,6 +256,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         else{
             Log.d("LOCATION_DEBUG","location is null");
             startLocationUpdates();
+            // startIntentService();
         }
 
     }
@@ -262,11 +278,26 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         //update the last location
 
         lastLocation = location;
+        startIntentService();
 
         Toast.makeText(this, "LOcation updated",
                 Toast.LENGTH_LONG).show();
     }
 
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+
+        // Display the address string stored in resultData
+        // or an error message sent from the intent service.
+        addressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
+
+        if (resultCode == SUCCESS_RESULT) {
+            Log.d(AddressResultReceiver.ADDRESS_TAG, "in onReceiveResult result is:"+addressOutput);
+
+
+        }
+    }
     protected void   createLocationRequest() {
 
         Log.d(LOCATION_TAG, "in createLocationRequest");
@@ -326,6 +357,9 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     }
 
     protected void startLocationUpdates(){
+        /**
+         * get current location
+         */
 
         Log.d(LOCATION_TAG,"in startLocationUpdates");
         if ( ActivityCompat.checkSelfPermission(
@@ -343,8 +377,12 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     }
 
     protected void startIntentService() {
+        /**
+         * start resolving the longitude to an address
+         */
+
         Log.d(LOCATION_TAG,"in startIntentService");
-        addResultReceiver = new AddressResultReceiver(null);
+        //addResultReceiver = new AddressResultReceiver(null);
 
         Intent intent = new Intent(this, FetchAddressIntentService.class);
         intent.putExtra(Constants.RECEIVER, addResultReceiver);
@@ -353,15 +391,17 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+
+
  /*   public class AddressResultReceiver extends ResultReceiver{
 
         *//**
-         * Create a new ResultReceive to receive results.  Your
-         * {@link #onReceiveResult} method will be called from the thread running
-         * <var>handler</var> if given, or from an arbitrary thread if null.
-         *
-         * @param handler
-         *//*
+ * Create a new ResultReceive to receive results.  Your
+ * {@link #onReceiveResult} method will be called from the thread running
+ * <var>handler</var> if given, or from an arbitrary thread if null.
+ *
+ * @param handler
+ *//*
         private String ADDRESS_TAG="DEBUG_ADDRESS_RECEIVED";
 
 

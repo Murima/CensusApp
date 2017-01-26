@@ -33,6 +33,8 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 
 import java.io.IOException;
@@ -48,9 +50,9 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
 {
     private static final int SURVEY_REQUEST = 1337;
-    private static int CATEGORY_ID;
+    private static String CATEGORY_ID;
     private static String LOCATION_TAG = "LOCATION_DEBUG";
-
+    private static String POST_TAG = "POST_DEBUG";
 
     GoogleApiClient googleApiClient;
 
@@ -112,7 +114,6 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Log.v("ANSWERS JSON", answers_json);
                 Log.d("****", "*****************************************************");
 
-
             }
         }
     }
@@ -136,50 +137,67 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvForAll:
+                CATEGORY_ID="1";
                 Intent i_survey = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey.putExtra("json_survey", loadSurveyJson("information_for_all.json"));
+                i_survey.putExtra("category", CATEGORY_ID);
+                i_survey.putExtra("location", lastLocation);
                 startActivityForResult(i_survey, SURVEY_REQUEST);
                 break;
 
             case R.id.tvFemales13:
+                CATEGORY_ID="2";
                 Intent i_survey2 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey2.putExtra("json_survey", loadSurveyJson("information_for_females_above_12yrs.json"));
+                i_survey2.putExtra("category", CATEGORY_ID);
                 startActivityForResult(i_survey2, SURVEY_REQUEST);
                 break;
 
             case R.id.tvAbove3yrs:
+                CATEGORY_ID="3";
                 Intent i_survey3 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey3.putExtra("json_survey", loadSurveyJson("information_for_persons_above_3yrs.json"));
+                i_survey3.putExtra("category", CATEGORY_ID);
                 startActivityForResult(i_survey3, SURVEY_REQUEST);
                 break;
 
             case R.id.tvICTinfo:
+                CATEGORY_ID="4";
                 Intent i_survey4 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey4.putExtra("json_survey", loadSurveyJson("information_regarding_ICT.json"));
+                i_survey4.putExtra("category", CATEGORY_ID);
                 startActivityForResult(i_survey4, SURVEY_REQUEST);
                 break;
 
             case R.id.tvLabourforce:
+                CATEGORY_ID="5";
                 Intent i_survey5 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey5.putExtra("json_survey", loadSurveyJson("labour_force_particulars_above_5yrs.json"));
+                i_survey5.putExtra("category", CATEGORY_ID);
                 startActivityForResult(i_survey5, SURVEY_REQUEST);
                 break;
 
             case R.id.tvOwnershipAmenities:
+                CATEGORY_ID="6";
                 Intent i_survey6 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey6.putExtra("json_survey", loadSurveyJson("ownership_of_household_assets.json"));
+                i_survey6.putExtra("category", CATEGORY_ID);
                 startActivityForResult(i_survey6, SURVEY_REQUEST);
                 break;
 
             case R.id.tvHousingCondition:
+                CATEGORY_ID="7";
                 Intent i_survey7 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey7.putExtra("json_survey", loadSurveyJson("housing_conditions_and_amenities.json"));
+                i_survey7.putExtra("category", CATEGORY_ID);
                 startActivityForResult(i_survey7, SURVEY_REQUEST);
                 break;
 
             case R.id.tvDisablepips:
+                CATEGORY_ID="8";
                 Intent i_survey8 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey8.putExtra("json_survey", loadSurveyJson("information_for_persons_with_disabilities.json"));
+                i_survey8.putExtra("category", CATEGORY_ID);
                 startActivityForResult(i_survey8, SURVEY_REQUEST);
                 break;
 
@@ -365,9 +383,4 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }*/
-
-
-
 }
-
-

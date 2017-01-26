@@ -23,7 +23,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "How often does the occupant use internet (eg. email, chatting, etc) ?",
-      "description": "",
+      "description": "my description",
       "required": true,
       "random_choices": true,
       "choices": [

@@ -54,7 +54,7 @@ public class EnumeratorIDActivity extends AppCompatActivity{
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(client.build())
+                //.client(client.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

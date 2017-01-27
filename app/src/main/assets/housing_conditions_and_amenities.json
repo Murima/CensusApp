@@ -8,19 +8,19 @@
     {
       "question_type": "String",
       "question_title": "How many dwelling units does the house hold/occupy?",
-      "description": "",
+      "description": "no_dwelling_units",
       "required": true
     },
     {
       "question_type": "String",
       "question_title": "How many habitable rooms do these units contain ?",
-      "description": "",
+      "description": "no_habitable_rooms",
       "required": true
     },
     {
       "question_type": "Radioboxes",
       "question_title": "What is the tenure status of the house?",
-      "description": "",
+      "description": "tenure_status",
       "required": true,
       "random_choices": true,
       "choices": [
@@ -32,7 +32,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "If rented/ provided state whether ?",
-      "description": "",
+      "description": "type_of_rented_house",
       "required": false,
       "random_choices": true,
       "choices": [
@@ -48,7 +48,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "What is the main source of water for the household?",
-      "description": "",
+      "description": "main_source_water",
       "required": true,
       "random_choices": true,
       "choices": [
@@ -69,7 +69,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "What is the main mode of human waste disposal?",
-      "description": "",
+      "description": "mode_human_waste_disposal",
       "required": true,
       "random_choices": true,
       "choices": [
@@ -87,7 +87,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "What is the main type of cooking oil?",
-      "description": "",
+      "description": "type_of_fuel",
       "required": true,
       "random_choices": true,
       "choices": [
@@ -104,7 +104,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "What is the main type of lighting fuel?",
-      "description": "",
+      "description": "type_of_lighting",
       "required": true,
       "random_choices": true,
       "choices": [

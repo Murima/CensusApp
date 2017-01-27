@@ -26,7 +26,7 @@ public class FragmentMultiline extends Fragment {
     private Button button_continue;
     private TextView textview_q_title;
     private EditText editText_answer;
-
+    private String description;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,7 +38,8 @@ public class FragmentMultiline extends Fragment {
         editText_answer = (EditText) rootView.findViewById(R.id.editText_answer);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                 Answers.getInstance().put_answer(textview_q_title.getText().toString(), editText_answer.getText().toString().trim());
+                 Answers.getInstance().put_answer(description, editText_answer.getText().toString().trim());
+
                 ((SurveyActivity) mContext).go_to_next();
             }
         });
@@ -51,6 +52,7 @@ public class FragmentMultiline extends Fragment {
 
         mContext = getActivity();
         Question q_data = (Question) getArguments().getSerializable("data");
+        description=q_data.getDescription();
 
         if (q_data.getRequired()) {
             button_continue.setVisibility(View.GONE);

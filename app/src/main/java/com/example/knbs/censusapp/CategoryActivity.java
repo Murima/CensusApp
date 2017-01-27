@@ -149,7 +149,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey.putExtra("json_survey", loadSurveyJson("information_for_all.json"));
                 i_survey.putExtra("category", CATEGORY_ID);
-                i_survey.putExtra("location", lastLocation);
+                i_survey.putExtra("location", addressOutput);
                 startActivityForResult(i_survey, SURVEY_REQUEST);
                 break;
 
@@ -158,7 +158,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey2 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey2.putExtra("json_survey", loadSurveyJson("information_for_females_above_12yrs.json"));
                 i_survey2.putExtra("category", CATEGORY_ID);
-                i_survey2.putExtra("location", lastLocation);
+                i_survey2.putExtra("location", addressOutput);
                 startActivityForResult(i_survey2, SURVEY_REQUEST);
                 break;
 
@@ -167,7 +167,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey3 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey3.putExtra("json_survey", loadSurveyJson("information_for_persons_above_3yrs.json"));
                 i_survey3.putExtra("category", CATEGORY_ID);
-                i_survey3.putExtra("location", lastLocation);
+                i_survey3.putExtra("location", addressOutput);
                 startActivityForResult(i_survey3, SURVEY_REQUEST);
                 break;
 
@@ -185,7 +185,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey5 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey5.putExtra("json_survey", loadSurveyJson("labour_force_particulars_above_5yrs.json"));
                 i_survey5.putExtra("category", CATEGORY_ID);
-                i_survey5.putExtra("location", lastLocation);
+                i_survey5.putExtra("location", addressOutput);
                 startActivityForResult(i_survey5, SURVEY_REQUEST);
                 break;
 
@@ -194,7 +194,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey6 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey6.putExtra("json_survey", loadSurveyJson("ownership_of_household_assets.json"));
                 i_survey6.putExtra("category", CATEGORY_ID);
-                i_survey6.putExtra("location", lastLocation);
+                i_survey6.putExtra("location", addressOutput);
                 startActivityForResult(i_survey6, SURVEY_REQUEST);
                 break;
 
@@ -203,7 +203,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey7 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey7.putExtra("json_survey", loadSurveyJson("housing_conditions_and_amenities.json"));
                 i_survey7.putExtra("category", CATEGORY_ID);
-                i_survey7.putExtra("location", lastLocation);
+                i_survey7.putExtra("location", addressOutput);
                 startActivityForResult(i_survey7, SURVEY_REQUEST);
                 break;
 
@@ -212,7 +212,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey8 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey8.putExtra("json_survey", loadSurveyJson("information_for_persons_with_disabilities.json"));
                 i_survey8.putExtra("category", CATEGORY_ID);
-                i_survey8.putExtra("location", lastLocation);
+                i_survey8.putExtra("location", addressOutput);
                 startActivityForResult(i_survey8, SURVEY_REQUEST);
                 break;
 

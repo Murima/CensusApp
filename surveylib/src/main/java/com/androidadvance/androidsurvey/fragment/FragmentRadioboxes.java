@@ -33,6 +33,7 @@ public class FragmentRadioboxes extends Fragment {
     private RadioGroup radioGroup;
     private final ArrayList<RadioButton> allRb = new ArrayList<>();
     private boolean at_leaset_one_checked = false;
+    private String description;
 
 
     @Override
@@ -67,7 +68,7 @@ public class FragmentRadioboxes extends Fragment {
         }
 
         if (the_choice.length() > 0) {
-            Answers.getInstance().put_answer(textview_q_title.getText().toString(), the_choice);
+            Answers.getInstance().put_answer(description, the_choice);
         }
 
 
@@ -89,6 +90,7 @@ public class FragmentRadioboxes extends Fragment {
 
         mContext = getActivity();
         q_data = (Question) getArguments().getSerializable("data");
+        description= q_data.getDescription();
 
         textview_q_title.setText(q_data.getQuestionTitle());
 

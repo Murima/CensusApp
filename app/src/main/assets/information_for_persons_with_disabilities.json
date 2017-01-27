@@ -9,7 +9,7 @@
     {
       "question_type": "Checkboxes",
       "question_title": "What type of disability does the occupant have?",
-      "description": "",
+      "description": "type_of_disability",
       "required": false,
       "random_choices": true,
       "choices": [
@@ -26,7 +26,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "Because of the disability mentioned does the occupant have any problems engaging in economic activiry?",
-      "description": "",
+      "description": "is_disability_affecting_productivity",
       "required": true,
       "random_choices": true,
       "choices": [

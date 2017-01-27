@@ -8,7 +8,7 @@
     {
       "question_type": "Checkboxes",
       "question_title": "Was the occupant able to get a service from the following items over the last one month ?",
-      "description": "",
+      "description": "internet_service",
       "required": false,
       "random_choices": true,
       "choices": [
@@ -23,7 +23,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "How often does the occupant use internet (eg. email, chatting, etc) ?",
-      "description": "my description",
+      "description": "internet_usage",
       "required": true,
       "random_choices": true,
       "choices": [
@@ -38,7 +38,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "Where does the occupant MAINLY use the ineternet ?",
-      "description": "",
+      "description": "internet_usage_place",
       "required": true,
       "random_choices": true,
       "choices": [

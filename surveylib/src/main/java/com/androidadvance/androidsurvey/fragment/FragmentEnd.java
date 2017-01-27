@@ -35,6 +35,7 @@ public class FragmentEnd extends Fragment {
             @Override
             public void onClick(View v) {
                 Answers.getInstance().put_answer("category", SurveyActivity.CATEGORY);
+                Answers.getInstance().put_answer("location", SurveyActivity.LOCATION);
                 ((SurveyActivity) mContext).event_survey_completed(Answers.getInstance());
 
             }

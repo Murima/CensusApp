@@ -8,7 +8,7 @@
     {
       "question_type": "Checkboxes",
       "question_title": "Did the household own any of the following items ?",
-      "description": "",
+      "description": "assets_owned",
       "required": true,
       "random_choices": false,
       "choices": [

@@ -9,19 +9,19 @@
     {
       "question_type": "String",
       "question_title": "What was the occupant doing for the last 7 days preceding this census ?",
-      "description": "",
+      "description": "last_work_done",
       "required": true
     },
 
     {
       "question_type": "String",
       "question_title": "Who is the occupants main employer?",
-      "description": "",
+      "description": "occupant_employer",
       "required": true
     },
     {
       "question_title": "How many hours did the occupant work in the last 7 days?",
-      "description": "[per day]",
+      "description": "hours_of_work",
       "required": true,
       "question_type": "Number"
     }

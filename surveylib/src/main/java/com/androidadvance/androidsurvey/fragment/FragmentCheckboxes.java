@@ -31,6 +31,7 @@ public class FragmentCheckboxes extends Fragment {
     private TextView textview_q_title;
     private LinearLayout linearLayout_checkboxes;
     private final ArrayList<CheckBox> allCb = new ArrayList<>();
+    private String description;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +66,7 @@ public class FragmentCheckboxes extends Fragment {
 
         if (the_choices.length() > 2) {
             the_choices = the_choices.substring(0, the_choices.length() - 2);
-            Answers.getInstance().put_answer(textview_q_title.getText().toString(), the_choices);
+            Answers.getInstance().put_answer(description, the_choices);
         }
 
 
@@ -86,6 +87,7 @@ public class FragmentCheckboxes extends Fragment {
 
         mContext = getActivity();
         q_data = (Question) getArguments().getSerializable("data");
+        description=q_data.getDescription();
 
         textview_q_title.setText(q_data != null ? q_data.getQuestionTitle() : "");
 

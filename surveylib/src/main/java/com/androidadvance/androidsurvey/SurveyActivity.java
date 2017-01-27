@@ -28,6 +28,8 @@ public class SurveyActivity extends AppCompatActivity {
     private ViewPager mPager;
     private String style_string = null;
     public static String CATEGORY;
+    public static String LOCATION;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class SurveyActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
             CATEGORY = bundle.getString("category");
+            LOCATION = bundle.getString("location");
 
             mSurveyPojo = new Gson().fromJson(bundle.getString("json_survey"), SurveyPojo.class);
             if (bundle.containsKey("style")) {

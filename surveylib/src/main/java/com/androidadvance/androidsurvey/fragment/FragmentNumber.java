@@ -27,6 +27,7 @@ public class FragmentNumber extends Fragment {
     private Button button_continue;
     private TextView textview_q_title;
     private EditText editText_answer;
+    private String description;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +41,7 @@ public class FragmentNumber extends Fragment {
         editText_answer.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Answers.getInstance().put_answer(textview_q_title.getText().toString(), editText_answer.getText().toString().trim());
+                Answers.getInstance().put_answer(description, editText_answer.getText().toString().trim());
                 ((SurveyActivity) mContext).go_to_next();
             }
         });
@@ -53,7 +54,7 @@ public class FragmentNumber extends Fragment {
 
         mContext = getActivity();
         Question q_data = (Question) getArguments().getSerializable("data");
-
+        description=q_data.getDescription();
 
         if (q_data.getRequired()) {
             button_continue.setVisibility(View.GONE);

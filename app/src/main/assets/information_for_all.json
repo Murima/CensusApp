@@ -8,21 +8,27 @@
     {
       "question_type": "String",
       "question_title": "What is the name of the Estate/ Flat the household belongs",
-      "description": "[use country codes for foreigners]",
+      "description": "household_estate",
       "required": true
     },
 
     {
-      "question_type": "String",
+      "question_type": "Number",
       "question_title": "What is the house number of the household?",
-      "description": "[use country codes for foreigners]",
+      "description": "houseNo",
+      "required": true
+    },
+    {
+      "question_type": "Number",
+      "question_title": "What is the National ID Number of the head of this household?",
+      "description": "head_id",
       "required": true
     },
 
     {
       "question_type": "Radioboxes",
       "question_title": "What is the occupant's relationship to the head of this household?",
-      "description": "",
+      "description": "occupant_relationship_to_head",
       "required": true,
       "random_choices": false,
       "choices": [
@@ -41,15 +47,15 @@
     },
     {
       "question_title": "How old is the occupant ?",
-      "description": "[put 0 if less than 1 yrs]",
+      "description": "occupant_age",
       "required": true,
       "question_type": "Number"
     },
 
     {
       "question_type": "Radioboxes",
-      "question_title": "What is the occupant's relationship to the head of this household?",
-      "description": "",
+      "question_title": "What is the occupants line mother",
+      "description": "occupant_lineage",
       "required": true,
       "random_choices": false,
       "choices": [
@@ -61,7 +67,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "Is the occupant a usual member of this household?",
-      "description": "",
+      "description": "is_occupant_usual_member",
       "required": true,
       "random_choices": false,
       "choices": [
@@ -72,14 +78,14 @@
     {
       "question_type": "String",
       "question_title": "What is the occupant's tribe or nationality?",
-      "description": "[use country codes for foreigners]",
+      "description": "occupant_tribe_nationality",
       "required": true
     },
 
     {
       "question_type": "Radioboxes",
       "question_title": "What is the religion of the occupant?",
-      "description": "",
+      "description": "occupant_religion",
       "required": true,
       "random_choices": false,
       "choices": [
@@ -96,7 +102,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "What is occupants marital status?",
-      "description": "",
+      "description": "occupant_marital_status",
       "required": true,
       "random_choices": false,
       "choices": [
@@ -112,25 +118,25 @@
     {
       "question_type": "String",
       "question_title": "Where was the occupant born?",
-      "description": "[use country codes for foreigners and counties for locals]",
+      "description": "occupant_POB",
       "required": true
     },
     {
       "question_type": "String",
       "question_title": "Where was the occupant living exactly one year ago?",
-      "description": "[use country codes for foreigners and counties for locals]",
+      "description": "previous_residence",
       "required": true
     },
     {
       "question_type": "String",
       "question_title": "When did the occupant move in the current county",
-      "description": "[use country codes for foreigners and counties for locals]",
+      "description": "date_of_moving_in",
       "required": true
     },
     {
       "question_type": "Radioboxes",
       "question_title": "Is occupants father alive?",
-      "description": "",
+      "description": "is_father_alive",
       "required": true,
       "random_choices": false,
       "choices": [
@@ -143,7 +149,7 @@
     {
       "question_type": "Radioboxes",
       "question_title": "Is occupants mother alive?",
-      "description": "",
+      "description": "is_mother_alive",
       "required": true,
       "random_choices": false,
       "choices": [

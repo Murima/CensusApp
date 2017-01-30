@@ -26,6 +26,13 @@
     },
 
     {
+      "question_type": "Number",
+      "question_title": "How many occupants are in this household?",
+      "description": "occupant_No",
+      "required": true
+    },
+
+    {
       "question_type": "Radioboxes",
       "question_title": "What is the occupant's relationship to the head of this household?",
       "description": "occupant_relationship_to_head",

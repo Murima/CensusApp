@@ -24,17 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.example.knbs.censusapp.Constants.BASE_URL;
 
 /**
- * Created by killer on 1/26/17.
+ * class to post form data to server
+ *
  */
 
 
 public class PostData {
 
-    /**
-     * method to post form data to server
-     * @param data
-     *
-     */
 
     public static String  SERVICE_URL = BASE_URL;
     private static String POST_TAG="POST_DEBUG";
@@ -47,7 +43,7 @@ public class PostData {
 
     public void postJson(String data){
         /**
-         * post the data using retrofit 2
+         * post the json using retrofit 2
          * @params json string data
          */
 
@@ -102,6 +98,7 @@ public class PostData {
             public void onFailure(Call<ResponseBody> call, Throwable throwable)
             {
                 // other stuff...
+                Log.d(POST_TAG, "in OnFailure"+throwable);
             }
         });
     }

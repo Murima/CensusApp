@@ -9,7 +9,7 @@
     {
       "question_type": "Checkboxes",
       "question_title": "What is the occupants current education status?",
-      "description": "occupant_education_status",
+      "description": "education_status",
       "required": false,
       "random_choices": true,
       "choices": [

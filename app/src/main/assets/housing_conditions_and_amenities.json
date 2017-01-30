@@ -6,15 +6,15 @@
   },
   "questions": [
     {
-      "question_type": "String",
+      "question_type": "Number",
       "question_title": "How many dwelling units does the house hold/occupy?",
-      "description": "no_dwelling_units",
+      "description": "dwelling_units",
       "required": true
     },
     {
-      "question_type": "String",
+      "question_type": "Number",
       "question_title": "How many habitable rooms do these units contain ?",
-      "description": "no_habitable_rooms",
+      "description": "habitable_rooms",
       "required": true
     },
     {

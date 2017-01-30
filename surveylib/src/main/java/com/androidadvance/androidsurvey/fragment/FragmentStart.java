@@ -1,5 +1,6 @@
 package com.androidadvance.androidsurvey.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.androidadvance.androidsurvey.LoopCounter;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.SurveyProperties;
@@ -46,7 +48,15 @@ public class FragmentStart extends Fragment {
         SurveyProperties survery_properties = (SurveyProperties) getArguments().getSerializable("survery_properties");
 
         assert survery_properties != null;
-        textView_start.setText(Html.fromHtml(survery_properties.getIntroMessage()));
+        boolean isCounterSet = LoopCounter.counterStatus();
+        if (isCounterSet){
+            textView_start.setTextColor(Color.parseColor("#ffaa00"));
+            textView_start.setText(R.string.loop_text);
+        }
+        else{
+            textView_start.setText(Html.fromHtml(survery_properties.getIntroMessage()));
+        }
+
 
 
 

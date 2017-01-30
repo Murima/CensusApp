@@ -4,4 +4,5 @@
     <string name="start">Start</string>
     <string name="close">Close</string>
     <string name="finish">Finish</string>
+    <string name="loop_text">Fill in the forms for the next occupant</string>
 </resources>

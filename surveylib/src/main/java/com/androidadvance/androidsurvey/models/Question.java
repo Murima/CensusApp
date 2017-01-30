@@ -30,6 +30,7 @@ public class Question implements Serializable {
     private List<String> choices = new ArrayList<String>();
     @SerializedName("min")
     @Expose
+
     private Integer min;
     @SerializedName("max")
     @Expose

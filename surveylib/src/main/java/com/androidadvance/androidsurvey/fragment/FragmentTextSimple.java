@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.androidadvance.androidsurvey.Answers;
+import com.androidadvance.androidsurvey.LoopCounter;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
@@ -27,6 +28,7 @@ public class FragmentTextSimple extends Fragment {
     private TextView textview_q_title;
     private EditText editText_answer;
     private String description;
+    LoopCounter loopCounter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,13 +36,27 @@ public class FragmentTextSimple extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_text_simple, container, false);
 
+        loopCounter = new LoopCounter();
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
         editText_answer = (EditText) rootView.findViewById(R.id.editText_answer);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Answers.getInstance().put_answer(description, editText_answer.getText().toString().trim());
+                boolean isCounterSet = LoopCounter.counterStatus();
+
+                if (description.equals("household_estate") && !isCounterSet){
+                    String estate = editText_answer.getText().toString().trim();
+                    loopCounter.setHouseEstate(estate);
+                }
+                else if(description.equals("household_estate") && isCounterSet){
+                    String estate = LoopCounter.getHouseEstate();
+                    Answers.getInstance().put_answer(description, estate);
+
+                }
+                else {
+                    Answers.getInstance().put_answer(description, editText_answer.getText().toString().trim());
+                }
                 ((SurveyActivity) mContext).go_to_next();
             }
         });

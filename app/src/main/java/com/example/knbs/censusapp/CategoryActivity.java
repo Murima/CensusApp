@@ -48,7 +48,7 @@ import static com.example.knbs.censusapp.Constants.SUCCESS_RESULT;
  */
 public class CategoryActivity extends AppCompatActivity implements View.OnClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
-    ,AddressResultReceiver.Receiver
+        ,AddressResultReceiver.Receiver
 {
     private static final int SURVEY_REQUEST = 1337;
     private static String LOCATION_TAG = "LOCATION_DEBUG";
@@ -61,19 +61,22 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     //address receiver
     public AddressResultReceiver addResultReceiver;
     public static String addressOutput;
+
+    TextView tvForAll, tvFemales13, tvtvDisablepips, tvAbove3yrs,
+            tvICTinfo, tvLabourforce, tvOwnershipAmenities, tvHousingCondition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_categories);
 
-        TextView tvForAll = (TextView) findViewById(R.id.tvForAll);
-        TextView tvFemales13 = (TextView) findViewById(R.id.tvFemales13);
-        TextView tvtvDisablepips = (TextView) findViewById(R.id.tvDisablepips);
-        TextView tvAbove3yrs = (TextView) findViewById(R.id.tvAbove3yrs);
-        TextView tvICTinfo = (TextView) findViewById(R.id.tvICTinfo);
-        TextView tvLabourforce = (TextView) findViewById(R.id.tvLabourforce);
-        TextView tvOwnershipAmenities = (TextView) findViewById(R.id.tvOwnershipAmenities);
-        TextView tvHousingCondition = (TextView) findViewById(R.id.tvHousingCondition);
+        tvForAll = (TextView) findViewById(R.id.tvForAll);
+        tvFemales13 = (TextView) findViewById(R.id.tvFemales13);
+        tvtvDisablepips = (TextView) findViewById(R.id.tvDisablepips);
+        tvAbove3yrs = (TextView) findViewById(R.id.tvAbove3yrs);
+        tvICTinfo = (TextView) findViewById(R.id.tvICTinfo);
+        tvLabourforce = (TextView) findViewById(R.id.tvLabourforce);
+        tvOwnershipAmenities = (TextView) findViewById(R.id.tvOwnershipAmenities);
+        tvHousingCondition = (TextView) findViewById(R.id.tvHousingCondition);
 
         tvForAll.setOnClickListener(this);
         tvFemales13.setOnClickListener(this);
@@ -110,6 +113,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == SURVEY_REQUEST) {
             if (resultCode == RESULT_OK) {
 
@@ -120,6 +124,12 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
                 PostData postData = new PostData(this);
                 postData.postJson(answers_json);
+
+                boolean counterStatus = data.getExtras().getBoolean("counter");
+                Log.d(POST_TAG,"in onActivityResult counter status"+counterStatus);
+                if (counterStatus){
+                    tvForAll.performClick();
+                }
             }
         }
     }

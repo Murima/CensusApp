@@ -30,7 +30,6 @@ public class SurveyActivity extends AppCompatActivity {
     public static String CATEGORY;
     public static String LOCATION;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,8 +145,17 @@ public class SurveyActivity extends AppCompatActivity {
 
     public void event_survey_completed(Answers instance) {
         Intent returnIntent = new Intent();
+        Log.d("DEBUG_LOOP", "event_survey_completed status="+LoopCounter.counterStatus());
+
+        if (LoopCounter.counterStatus()){
+            returnIntent.putExtra("counter",true);
+        }
+        else {
+            returnIntent.putExtra("counter", false);
+        }
         returnIntent.putExtra("answers", instance.get_json_object());
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
+
     }
 }

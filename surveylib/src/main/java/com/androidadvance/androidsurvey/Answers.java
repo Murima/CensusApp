@@ -9,16 +9,23 @@ import java.util.LinkedHashMap;
 
 public class Answers {
     private volatile static Answers uniqueInstance;
-    private final LinkedHashMap<String, String> answered_hashmap = new LinkedHashMap<>();
+    private LinkedHashMap<String, String> answered_hashmap = new LinkedHashMap<>();
 
 
-    private Answers() {
+    public Answers() {
     }
 
     public void put_answer(String key, String value) {
         answered_hashmap.put(key, value);
     }
 
+    public void clear_hashmap(){
+        /**
+         * clears the hashmap before starting a new category.
+         */
+        answered_hashmap.clear();
+
+    }
     public String get_json_object() {
         Gson gson = new Gson();
         return gson.toJson(answered_hashmap,LinkedHashMap.class);

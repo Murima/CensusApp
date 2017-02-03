@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.androidadvance.androidsurvey.Answers;
 import com.androidadvance.androidsurvey.LoopCounter;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
+import com.androidadvance.androidsurvey.models.Question;
 import com.androidadvance.androidsurvey.models.SurveyProperties;
 
 
@@ -33,6 +35,8 @@ public class FragmentStart extends Fragment {
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Answers answers = new Answers();
+                answers.clear_hashmap();// clear the hash array
                 ((SurveyActivity) mContext).go_to_next();
             }
         });
@@ -45,6 +49,7 @@ public class FragmentStart extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mContext = getActivity();
+        Question q_data = (Question) getArguments().getSerializable("data");
         SurveyProperties survery_properties = (SurveyProperties) getArguments().getSerializable("survery_properties");
 
         assert survery_properties != null;

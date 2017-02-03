@@ -52,6 +52,8 @@ public class FragmentNumber extends Fragment {
                     String number = editText_answer.getText().toString().trim();
                     int counter = Integer.parseInt(number);
                     loopCounter.setNumber(counter);
+                    Answers.getInstance().put_answer(description, number);
+
                 }
                 else if(description.equals("occupant_No") && isCounterSet){
                     int counter = LoopCounter.getNumber();
@@ -64,6 +66,8 @@ public class FragmentNumber extends Fragment {
                     String number = editText_answer.getText().toString().trim();
                     int counter = Integer.parseInt(number);
                     loopCounter.setHeadId(counter);
+                    Answers.getInstance().put_answer(description, number);
+
                 }
 
                 else if(description.equals("head_id") && isCounterSet){
@@ -77,6 +81,8 @@ public class FragmentNumber extends Fragment {
                     String number = editText_answer.getText().toString().trim();
                     int counter = Integer.parseInt(number);
                     loopCounter.setHouseNo(counter);
+                    Answers.getInstance().put_answer(description, number);
+
                 }
 
                 else if(description.equals("houseNo") && isCounterSet){
@@ -153,11 +159,14 @@ public class FragmentNumber extends Fragment {
                 editText_answer.setText(counterString);
             }
             else{
+
+                editText_answer.setEnabled(true);
                 editText_answer.requestFocus();
             }
 
         }
         else {
+            editText_answer.setEnabled(true);
             editText_answer.requestFocus();
 
         }

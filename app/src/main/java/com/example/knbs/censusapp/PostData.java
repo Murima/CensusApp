@@ -58,7 +58,7 @@ public class PostData {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(SERVICE_URL)
-                .client(client.build())
+                .client(client.build())//logging
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

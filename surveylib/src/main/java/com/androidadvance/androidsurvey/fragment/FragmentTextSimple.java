@@ -48,6 +48,7 @@ public class FragmentTextSimple extends Fragment {
                 if (description.equals("household_estate") && !isCounterSet){
                     String estate = editText_answer.getText().toString().trim();
                     loopCounter.setHouseEstate(estate);
+                    Answers.getInstance().put_answer(description, estate);
                 }
                 else if(description.equals("household_estate") && isCounterSet){
                     String estate = LoopCounter.getHouseEstate();

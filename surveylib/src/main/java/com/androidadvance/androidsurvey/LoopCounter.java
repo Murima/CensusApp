@@ -9,8 +9,7 @@ import android.util.Log;
 public class LoopCounter {
 
 
-    public int number;
-    public int numberLeft;
+    public static int occupantNumber;
     public static boolean isCounterSet;
     public static int counterNumber;
     public static int houseNo;
@@ -23,8 +22,12 @@ public class LoopCounter {
      */
 
     public void setNumber(int number){
-        isCounterSet=true;
+        if (number >1){
+            isCounterSet=true;
+        }
+
         counterNumber= number;
+        occupantNumber = number;
     }
 
     public void setHouseNo(int number){
@@ -51,7 +54,10 @@ public class LoopCounter {
         isCounterSet=false;
         return 0;
     }
+    public static int getNumberLeft(){
 
+        return  counterNumber;
+    }
     public static int getHouseNo(){
         return houseNo;
     }

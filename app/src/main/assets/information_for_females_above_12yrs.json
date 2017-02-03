@@ -1,8 +1,8 @@
 {
   "survey_properties": {
-    "intro_message": "The following forms should be filled by the census enumerator and should be asked with utmost professionalism as per training",
+    "intro_message": "",
     "end_message": "Category complete please open the next category",
-    "skip_intro": false
+    "skip_intro": true
   },
   "questions": [
     {

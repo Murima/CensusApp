@@ -37,7 +37,7 @@
         android:layout_toEndOf="@+id/tvTaskID" />
 
     <CheckBox
-        android:text="CheckBox"
+        android:text="is open"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"

@@ -146,8 +146,9 @@ public class SurveyActivity extends AppCompatActivity {
     public void event_survey_completed(Answers instance) {
         Intent returnIntent = new Intent();
         Log.d("DEBUG_LOOP", "event_survey_completed status="+LoopCounter.counterStatus());
+        int numberLeft = LoopCounter.getNumberLeft();
 
-        if (LoopCounter.counterStatus()){
+        if (numberLeft!=0 & LoopCounter.counterStatus()){
             returnIntent.putExtra("counter",true);
         }
         else {

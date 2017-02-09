@@ -1,5 +1,7 @@
 package com.androidadvance.androidsurvey;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 
@@ -9,7 +11,7 @@ import java.util.LinkedHashMap;
 
 public class Answers {
     private volatile static Answers uniqueInstance;
-    private LinkedHashMap<String, String> answered_hashmap = new LinkedHashMap<>();
+    public LinkedHashMap<String, String> answered_hashmap = new LinkedHashMap<>();
 
 
     public Answers() {
@@ -23,6 +25,7 @@ public class Answers {
         /**
          * clears the hashmap before starting a new category.
          */
+        Log.d("DEBUG_POST", "in clear_hashmap");
         answered_hashmap.clear();
 
     }

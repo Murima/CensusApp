@@ -39,6 +39,9 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.example.knbs.censusapp.Constants.SUCCESS_RESULT;
 //import java.util.jar.Manifest;
@@ -152,6 +155,9 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         String CATEGORY_ID;
+        Date currDate = new Date();
+        String formattedDate = new SimpleDateFormat("dd-mm-yyy").format(currDate);
+
 
         switch (v.getId()) {
             case R.id.tvForAll:
@@ -160,6 +166,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 i_survey.putExtra("json_survey", loadSurveyJson("information_for_all.json"));
                 i_survey.putExtra("category", CATEGORY_ID);
                 i_survey.putExtra("location", addressOutput);
+                i_survey.putExtra("date",  formattedDate);
                 startActivityForResult(i_survey, SURVEY_REQUEST);
                 break;
 
@@ -168,6 +175,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey2 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey2.putExtra("json_survey", loadSurveyJson("information_for_females_above_12yrs.json"));
                 i_survey2.putExtra("category", CATEGORY_ID);
+                i_survey2.putExtra("date",  formattedDate);
                 i_survey2.putExtra("location", addressOutput);
                 startActivityForResult(i_survey2, SURVEY_REQUEST);
                 break;
@@ -177,6 +185,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 Intent i_survey3 = new Intent(CategoryActivity.this, SurveyActivity.class);
                 i_survey3.putExtra("json_survey", loadSurveyJson("information_for_persons_above_3yrs.json"));
                 i_survey3.putExtra("category", CATEGORY_ID);
+                i_survey3.putExtra("date",  formattedDate);
                 i_survey3.putExtra("location", addressOutput);
                 startActivityForResult(i_survey3, SURVEY_REQUEST);
                 break;
@@ -187,6 +196,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 i_survey4.putExtra("json_survey", loadSurveyJson("information_regarding_ICT.json"));
                 i_survey4.putExtra("category", CATEGORY_ID);
                 i_survey4.putExtra("location", addressOutput);
+                i_survey4.putExtra("date",  formattedDate);
                 startActivityForResult(i_survey4, SURVEY_REQUEST);
                 break;
 
@@ -196,6 +206,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 i_survey5.putExtra("json_survey", loadSurveyJson("labour_force_particulars_above_5yrs.json"));
                 i_survey5.putExtra("category", CATEGORY_ID);
                 i_survey5.putExtra("location", addressOutput);
+                i_survey5.putExtra("date",  formattedDate);
                 startActivityForResult(i_survey5, SURVEY_REQUEST);
                 break;
 
@@ -205,6 +216,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 i_survey6.putExtra("json_survey", loadSurveyJson("ownership_of_household_assets.json"));
                 i_survey6.putExtra("category", CATEGORY_ID);
                 i_survey6.putExtra("location", addressOutput);
+                i_survey6.putExtra("date",  formattedDate);
                 startActivityForResult(i_survey6, SURVEY_REQUEST);
                 break;
 
@@ -214,6 +226,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 i_survey7.putExtra("json_survey", loadSurveyJson("housing_conditions_and_amenities.json"));
                 i_survey7.putExtra("category", CATEGORY_ID);
                 i_survey7.putExtra("location", addressOutput);
+                i_survey7.putExtra("date",  formattedDate);
                 startActivityForResult(i_survey7, SURVEY_REQUEST);
                 break;
 
@@ -223,6 +236,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 i_survey8.putExtra("json_survey", loadSurveyJson("information_for_persons_with_disabilities.json"));
                 i_survey8.putExtra("category", CATEGORY_ID);
                 i_survey8.putExtra("location", addressOutput);
+                i_survey8.putExtra("date",  formattedDate);
                 startActivityForResult(i_survey8, SURVEY_REQUEST);
                 break;
 

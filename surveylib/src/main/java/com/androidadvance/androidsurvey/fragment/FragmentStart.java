@@ -35,8 +35,7 @@ public class FragmentStart extends Fragment {
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Answers answers = new Answers();
-                answers.clear_hashmap();// clear the hash array
+                Answers.getInstance().clear_hashmap();//clear the hash array
                 ((SurveyActivity) mContext).go_to_next();
             }
         });

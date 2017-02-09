@@ -36,6 +36,8 @@ public class FragmentEnd extends Fragment {
             public void onClick(View v) {
                 Answers.getInstance().put_answer("category", SurveyActivity.CATEGORY);
                 Answers.getInstance().put_answer("location", SurveyActivity.LOCATION);
+                Answers.getInstance().put_answer("date", SurveyActivity.DATE);
+
                 ((SurveyActivity) mContext).event_survey_completed(Answers.getInstance());
 
             }

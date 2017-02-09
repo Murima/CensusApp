@@ -1,8 +1,8 @@
 {
   "survey_properties": {
-    "intro_message": "None...It will be skipped!",
+    "intro_message": "Category",
     "end_message": "This is the last category, please ensure that all answers are added",
-    "skip_intro": true
+    "skip_intro": false
   },
   "questions": [
     {

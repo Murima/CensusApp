@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class SurveyActivity extends AppCompatActivity {
 
+    public static String DATE;
     private SurveyPojo mSurveyPojo;
     private ViewPager mPager;
     private String style_string = null;
@@ -41,13 +42,13 @@ public class SurveyActivity extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             CATEGORY = bundle.getString("category");
             LOCATION = bundle.getString("location");
+            DATE = bundle.getString("date");
 
             mSurveyPojo = new Gson().fromJson(bundle.getString("json_survey"), SurveyPojo.class);
             if (bundle.containsKey("style")) {
                 style_string = bundle.getString("style");
             }
         }
-
 
         Log.i("json Object = ", String.valueOf(mSurveyPojo.getQuestions()));
 

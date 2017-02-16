@@ -156,7 +156,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         String CATEGORY_ID;
         Date currDate = new Date();
-        String formattedDate = new SimpleDateFormat("dd-mm-yyy").format(currDate);
+        String formattedDate = new SimpleDateFormat("dd-MM-yyyy").format(currDate);
 
 
         switch (v.getId()) {
@@ -415,36 +415,4 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
-
- /*   public class AddressResultReceiver extends ResultReceiver{
-
-        *//**
- * Create a new ResultReceive to receive results.  Your
- * {@link #onReceiveResult} method will be called from the thread running
- * <var>handler</var> if given, or from an arbitrary thread if null.
- *
- * @param handler
- *//*
-        private String ADDRESS_TAG="DEBUG_ADDRESS_RECEIVED";
-
-
-
-        public AddressResultReceiver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            // Display the address string stored in resultData
-            // or an error message sent from the intent service.
-            addressOutput = resultData.getString(Constants.RESULT_DATA_KEY);
-
-            if (resultCode == SUCCESS_RESULT) {
-                Log.d(ADDRESS_TAG, "in onReceiveResult result is:"+addressOutput);
-            }
-
-        }
-
-    }*/
 }

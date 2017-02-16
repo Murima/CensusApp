@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.androidadvance.androidsurvey.Answers;
+import com.androidadvance.androidsurvey.FormValidators;
 import com.androidadvance.androidsurvey.LoopCounter;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
@@ -88,7 +89,8 @@ public class FragmentTextSimple extends Fragment {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if (s.length() > 3) {
+                    boolean valid = validator(s);
+                    if (valid) {
                         button_continue.setVisibility(View.VISIBLE);
                     } else {
                         button_continue.setVisibility(View.GONE);
@@ -103,5 +105,18 @@ public class FragmentTextSimple extends Fragment {
         imm.showSoftInput(editText_answer, 0);
 
 
+    }
+
+    private boolean validator(Editable s) {
+        FormValidators inputValidator = new FormValidators(s);
+
+        switch (description){
+            case "date_of_moving_in":
+                return inputValidator.dateValidator();
+
+            case "date_last_child":
+                return inputValidator.dateValidator();
+        }
+        return  true;
     }
 }

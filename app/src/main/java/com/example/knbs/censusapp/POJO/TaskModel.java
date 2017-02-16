@@ -26,6 +26,13 @@ public class TaskModel {
     @SerializedName("remember_token")
     @Expose
     private Object rememberToken;
+    private String status;
+    @SerializedName("post_status")
+    @Expose
+    private String postStatus;
+    @SerializedName("date")
+    @Expose
+    private String date;
 
     public String getTaskId() {
         return taskId;
@@ -57,6 +64,21 @@ public class TaskModel {
 
     public void setTaskDuration(String taskDuration) {
         this.taskDuration = taskDuration;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPostStatus() {
+        return postStatus;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Object getRememberToken() {

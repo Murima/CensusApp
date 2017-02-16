@@ -30,11 +30,15 @@
         <activity
             android:name=".EnumeratorHomeActivity"
             android:label="@string/title_activity_enumerator_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".CategoryActivity"
             android:label="Census Categories"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name="com.androidadvance.androidsurvey.SurveyActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
@@ -51,7 +55,9 @@
         <activity
             android:name=".TaskLIstActivity"
             android:label="@string/title_activity_task_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

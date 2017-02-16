@@ -62,14 +62,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            style="@style/EnumIDText">
+            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
-                android:text="First Name:"/>
+                android:text="First Name:"
+                style="@style/EnumIDText"/>
 
             <TextView
                 android:id="@+id/tvEnumFName"
@@ -77,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="3"
+                style="@style/EnumIDText"
                 android:text="The Name">
 
             </TextView>
@@ -94,6 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                style="@style/EnumIDText"
                 android:text="Last Name:"
                 android:textStyle="bold"
                 />
@@ -103,6 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                style="@style/EnumIDText"
                 android:text="The Name">
 
             </TextView>
@@ -120,6 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                style="@style/EnumIDText"
                 android:text="County:"/>
 
             <TextView
@@ -127,6 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="37dp"
+                style="@style/EnumIDText"
                 android:text="County Name">
 
             </TextView>
@@ -144,6 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                style="@style/EnumIDText"
                 android:text="Phone:"/>
 
             <TextView
@@ -151,6 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
+                style="@style/EnumIDText"
                 android:text="0768543653">
 
             </TextView>
@@ -168,6 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                style="@style/EnumIDText"
                 android:text="Reports To:"/>
 
             <TextView
@@ -175,6 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="13dp"
+                style="@style/EnumIDText"
                 android:text="Mr Census">
 
             </TextView>
@@ -192,6 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                style="@style/EnumIDText"
                 android:text="Supervisor No:"/>
 
             <TextView
@@ -200,6 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                style="@style/EnumIDText"
                 android:text="0739765439">
 
             </TextView>

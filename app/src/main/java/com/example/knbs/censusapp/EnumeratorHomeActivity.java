@@ -101,14 +101,15 @@ public class EnumeratorHomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_logout) {
-            // Handle the camera action
+            // Handle the logout
         }
 
         else if (id == R.id.nav_settings) {
-
+             //handle settings option
         }
 
         else if (id == R.id.nav_share) {
+            //handle share option
 
         } else if (id == R.id.nav_send) {
             Intent sendIntent = new Intent(Intent.ACTION_SEND);

@@ -23,4 +23,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_enumerator_home">Enumerator Home</string>
     <string name="title_activity_task_list">Enumerator Task List</string>
+
+
 </resources>

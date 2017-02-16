@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.androidadvance.androidsurvey.Answers;
+import com.androidadvance.androidsurvey.FormValidators;
 import com.androidadvance.androidsurvey.LoopCounter;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
@@ -122,12 +123,15 @@ public class FragmentNumber extends Fragment {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if (s.length() > 0) {
+                    boolean valid = validator(s);
+                    if (valid) {
                         button_continue.setVisibility(View.VISIBLE);
                     } else {
                         button_continue.setVisibility(View.GONE);
                     }
                 }
+
+
             });
         }
 
@@ -173,4 +177,18 @@ public class FragmentNumber extends Fragment {
         InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Service.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editText_answer, 0);
     }
+
+    private boolean validator(Editable s) {
+        FormValidators inputValidator = new FormValidators(s);
+
+        switch (description){
+            case "head_id":
+                return inputValidator.lengthValidator();
+            case "houseNo":
+                return true;
+        }
+        return  true;
+    }
+
+
 }

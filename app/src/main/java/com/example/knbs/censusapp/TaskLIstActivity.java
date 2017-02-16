@@ -78,7 +78,6 @@ public class TaskLIstActivity extends AppCompatActivity {
                 Log.i(TAG,"server response code"+code);
 
                 if(response.isSuccessful()){
-                    //Log.i("in on Response","Task Name"+taskDetails.getTaskName());
                     for(int i =0; i<response.body().size();i++){
                         Log.d(TAG,"tasks"+response.body().get(i).getTaskName());
                     }
@@ -111,6 +110,8 @@ public class TaskLIstActivity extends AppCompatActivity {
 
         TasksAdapter adapter = new TasksAdapter(this,
                 R.layout.task_cell, array);
+        View header = getLayoutInflater().inflate(R.layout.task_list_header, null);
+        lvTaskList.addHeaderView(header);
         lvTaskList.setAdapter(adapter);
 
     }

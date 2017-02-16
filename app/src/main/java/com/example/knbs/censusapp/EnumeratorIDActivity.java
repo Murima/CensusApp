@@ -33,7 +33,7 @@ public class EnumeratorIDActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enumerator_id);
 
-        //initialize veiws
+        //initialize views
         final ImageView imgAcc = (ImageView) findViewById(R.id.imgAccount);
         final TextView enumID = (TextView) findViewById(R.id.enumID);
         final TextView tvEnumFName = (TextView) findViewById(R.id.tvEnumFName);
@@ -73,7 +73,6 @@ public class EnumeratorIDActivity extends AppCompatActivity{
                 if(response.isSuccessful()){
                     AccountModel userDetails = response.body();
 
-                    Log.i("in on Response","First Name"+userDetails.getFirstName());
                     enumID.setText(userDetails.getId().toString());
                     tvEnumFName.setText(userDetails.getFirstName());
                     tvEnumLName.setText(userDetails.getLastName());

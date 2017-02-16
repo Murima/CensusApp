@@ -39,7 +39,6 @@ public class FragmentEnd extends Fragment {
                 Answers.getInstance().put_answer("date", SurveyActivity.DATE);
 
                 ((SurveyActivity) mContext).event_survey_completed(Answers.getInstance());
-
             }
         });
 

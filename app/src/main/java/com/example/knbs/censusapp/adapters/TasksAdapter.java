@@ -62,11 +62,11 @@ public class TasksAdapter extends ArrayAdapter<TaskModel> {
         String postStatus = task.getPostStatus();
 
         if (postStatus.equals("Accepted")){
-            holder.tvName.setTextColor(Color.GREEN);
-            holder.tvID.setTextColor(Color.GREEN);
+            holder.tvName.setTextColor(Color.parseColor("#669900"));
+            holder.tvID.setTextColor(Color.parseColor("#669900"));
             //check status and post status.
             holder.chkStatus.setText("Accepted");
-            holder.chkStatus.setTextColor(Color.GREEN);
+            holder.chkStatus.setTextColor(Color.parseColor("#669900"));
             holder.chkStatus.setChecked(true);
         }
         else if (postStatus.equals("Rejected")){
@@ -74,9 +74,17 @@ public class TasksAdapter extends ArrayAdapter<TaskModel> {
             holder.chkStatus.setTextColor(Color.RED);
             holder.chkStatus.setChecked(false);
         }
+
+        else if (postStatus.equals("Pending")){
+            holder.tvName.setTextColor(Color.parseColor("#ffcc00"));
+            holder.tvID.setTextColor(Color.parseColor("#ffcc00"));
+            holder.chkStatus.setText("Pending");
+            holder.chkStatus.setTextColor(Color.parseColor("#ffcc00"));
+            holder.chkStatus.setChecked(false);
+        }
         else{
-
-
+            holder.chkStatus.setText("Open");
+            holder.chkStatus.setChecked(false);
         }
         return row;
     }

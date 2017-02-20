@@ -13,9 +13,9 @@
       "required": false,
       "random_choices": true,
       "choices": [
-        "At school/ learning institution",
-        "Finished or left school/learning institution",
-        "Never went to school/ learning institution",
+        "At learning institution",
+        "Left School",
+        "Never went to school",
         "Dont Know"
       ]
     },

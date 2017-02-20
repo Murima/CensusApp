@@ -145,6 +145,7 @@ public class EnumeratorHomeActivity extends AppCompatActivity
             case R.id.tvTaskList:
                 Intent taskList = new Intent(this, TaskLIstActivity.class);
                 startActivity(taskList);
+                break;
             default:
                 Log.i("DEFAULT ONCLICK OPT","This is default switch mode");
                 break;

@@ -100,11 +100,6 @@ public class TaskLIstActivity extends AppCompatActivity {
     private void renderScreen(List<TaskModel> taskDetails){
         Log.d(TAG, "in renderScreen");
 
-       /* ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.task_cell, taskDetails);
-        adapter.clear();
-        adapter.addAll(taskDetails);
-        lvTaskList.setAdapter(adapter);*/
-
         TaskModel [] array = new TaskModel[taskDetails.size()];
         for(int i = 0; i < taskDetails.size(); i++) array[i] = taskDetails.get(i);
 

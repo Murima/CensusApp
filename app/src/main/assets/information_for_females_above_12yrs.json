@@ -1,6 +1,6 @@
 {
   "survey_properties": {
-    "intro_message": "Category: ",
+    "intro_message": "Category:",
     "end_message": "Category complete please open the next category",
     "skip_intro": false
   },
